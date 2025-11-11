@@ -7,6 +7,7 @@ import {
 import { useToast } from '../../hooks/useToast';
 import { useAuth } from '../../contexts/AuthContext';
 import enaLogo from '../../assets/images/ena-logo.png';
+import { authenticateUser } from '../../data/mockUsers';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -72,28 +73,33 @@ const Login: React.FC = () => {
 
     setIsLoading(true);
 
-    // Simulation d'authentification
+    // Simulation d'authentification avec délai
     setTimeout(() => {
-      // Simulation de vérification des credentials
-      if (formData.email === 'admin@ena.cd' && formData.password === 'admin123') {
+      // Authentifier avec le système de mock
+      const authenticatedUser = authenticateUser(formData.email, formData.password);
+      
+      if (authenticatedUser) {
         const userData = {
-          id: '1',
-          email: formData.email,
-          firstName: 'Victor',
-          lastName: 'Bafuafua',
-          role: 'Directeur',
+          id: authenticatedUser.id,
+          email: authenticatedUser.email,
+          firstName: authenticatedUser.firstName,
+          lastName: authenticatedUser.lastName,
+          role: authenticatedUser.role,
           loginTime: new Date().toISOString()
         };
         
         login(userData);
-        showToast('success', 'Connexion réussie !', 'Bienvenue sur le portail ENA');
+        showToast('success', 'Connexion réussie !', `Bienvenue ${userData.firstName} ${userData.lastName}`);
         navigate(from, { replace: true });
       } else {
         showToast('error', 'Erreur de connexion', 'Email ou mot de passe incorrect');
-        setErrors({ email: 'Identifiants incorrects' });
+        setErrors({ 
+          email: 'Identifiants incorrects',
+          password: 'Identifiants incorrects'
+        });
       }
       setIsLoading(false);
-    }, 1500);
+    }, 1000);
   };
 
   return (
