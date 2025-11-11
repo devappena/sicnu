@@ -5,6 +5,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { statisticsService } from '@/api';
 import type { ReportConfig } from '@/api';
+import { config } from '@/config/devConfig';
+import { mockDashboardStats } from '@/data/mockData';
 
 // Clés de requête pour le cache
 export const statisticsKeys = {
@@ -30,7 +32,14 @@ export const statisticsKeys = {
 export function useDashboardStats() {
   return useQuery({
     queryKey: statisticsKeys.dashboard(),
-    queryFn: () => statisticsService.getDashboardStats(),
+    queryFn: async () => {
+      // Mode mock pour le développement
+      if (config.USE_MOCK_DATA) {
+        await new Promise(resolve => setTimeout(resolve, config.MOCK_DELAY));
+        return mockDashboardStats;
+      }
+      return statisticsService.getDashboardStats();
+    },
     staleTime: 2 * 60 * 1000, // 2 minutes
     refetchInterval: 5 * 60 * 1000, // Rafraîchir toutes les 5 minutes
   });

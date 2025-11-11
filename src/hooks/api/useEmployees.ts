@@ -5,6 +5,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { employeeService } from '@/api';
 import type { EmployeeFormData, PaginationParams } from '@/api';
+import { config } from '@/config/devConfig';
+import { mockEmployees } from '@/data/mockData';
 
 // Clés de requête
 export const employeeKeys = {
@@ -22,7 +24,19 @@ export const employeeKeys = {
 export function useEmployees(params?: PaginationParams) {
   return useQuery({
     queryKey: employeeKeys.list(params),
-    queryFn: () => employeeService.getAll(params),
+    queryFn: async () => {
+      // Mode mock pour le développement
+      if (config.USE_MOCK_DATA) {
+        await new Promise(resolve => setTimeout(resolve, config.MOCK_DELAY));
+        return {
+          data: mockEmployees,
+          total: mockEmployees.length,
+          page: params?.page || 1,
+          limit: params?.limit || 10
+        };
+      }
+      return employeeService.getAll(params);
+    },
     staleTime: 2 * 60 * 1000,
   });
 }

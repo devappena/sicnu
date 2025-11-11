@@ -5,6 +5,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { absenceService } from '@/api';
 import type { AbsenceFormData, PaginationParams } from '@/api';
+import { config } from '@/config/devConfig';
+import { mockAbsences } from '@/data/mockData';
 
 // Clés de requête pour le cache
 export const absenceKeys = {
@@ -30,7 +32,26 @@ export function useAbsences(params?: PaginationParams & {
 }) {
   return useQuery({
     queryKey: absenceKeys.list(params),
-    queryFn: () => absenceService.getAll(params),
+    queryFn: async () => {
+      // Mode mock pour le développement
+      if (config.USE_MOCK_DATA) {
+        await new Promise(resolve => setTimeout(resolve, config.MOCK_DELAY));
+        let filteredAbsences = [...mockAbsences];
+        
+        // Filtrer par statut si spécifié
+        if (params?.status) {
+          filteredAbsences = filteredAbsences.filter(a => a.status === params.status);
+        }
+        
+        return {
+          data: filteredAbsences,
+          total: filteredAbsences.length,
+          page: params?.page || 1,
+          limit: params?.limit || 10
+        };
+      }
+      return absenceService.getAll(params);
+    },
     staleTime: 2 * 60 * 1000, // 2 minutes
   });
 }

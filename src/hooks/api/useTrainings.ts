@@ -5,6 +5,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { trainingService } from '@/api';
 import type { TrainingFormData, PaginationParams } from '@/api';
+import { config } from '@/config/devConfig';
+import { mockTrainings } from '@/data/mockData';
 
 // Clés de requête pour le cache
 export const trainingKeys = {
@@ -29,7 +31,26 @@ export function useTrainings(params?: PaginationParams & {
 }) {
   return useQuery({
     queryKey: trainingKeys.list(params),
-    queryFn: () => trainingService.getAll(params),
+    queryFn: async () => {
+      // Mode mock pour le développement
+      if (config.USE_MOCK_DATA) {
+        await new Promise(resolve => setTimeout(resolve, config.MOCK_DELAY));
+        let filteredTrainings = [...mockTrainings];
+        
+        // Filtrer par statut si spécifié
+        if (params?.status) {
+          filteredTrainings = filteredTrainings.filter(t => t.status === params.status);
+        }
+        
+        return {
+          data: filteredTrainings,
+          total: filteredTrainings.length,
+          page: params?.page || 1,
+          limit: params?.limit || 10
+        };
+      }
+      return trainingService.getAll(params);
+    },
     staleTime: 3 * 60 * 1000, // 3 minutes
   });
 }
