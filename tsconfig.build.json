@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/test/**/*",
+    "src/components/__tests__/**/*",
+    "src/pages/time-management/Timesheet.tsx"
+  ],
+  "compilerOptions": {
+    "verbatimModuleSyntax": false,
+    "skipLibCheck": true,
+    "strict": false
+  }
+}

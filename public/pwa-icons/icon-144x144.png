@@ -1,0 +1,47 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond bleu foncé -->
+  <rect width="512" height="512" fill="#1e40af" rx="64"/>
+  
+  <!-- Bordure dorée -->
+  <rect x="24" y="24" width="464" height="464" fill="none" stroke="#fbbf24" stroke-width="8" rx="48"/>
+  
+  <!-- Logo ENA stylisé -->
+  <g transform="translate(256,256)">
+    <!-- Cercle central -->
+    <circle cx="0" cy="0" r="120" fill="#fbbf24" opacity="0.2"/>
+    
+    <!-- Lettre E -->
+    <g transform="translate(-80,-40)">
+      <rect x="0" y="0" width="8" height="80" fill="#fbbf24"/>
+      <rect x="0" y="0" width="40" height="8" fill="#fbbf24"/>
+      <rect x="0" y="36" width="32" height="8" fill="#fbbf24"/>
+      <rect x="0" y="72" width="40" height="8" fill="#fbbf24"/>
+    </g>
+    
+    <!-- Lettre N -->
+    <g transform="translate(-20,-40)">
+      <rect x="0" y="0" width="8" height="80" fill="#fbbf24"/>
+      <rect x="32" y="0" width="8" height="80" fill="#fbbf24"/>
+      <polygon points="8,0 8,8 32,72 32,64" fill="#fbbf24"/>
+    </g>
+    
+    <!-- Lettre A -->
+    <g transform="translate(30,-40)">
+      <polygon points="20,0 0,80 8,80 12,64 28,64 32,80 40,80" fill="#fbbf24"/>
+      <rect x="14" y="48" width="12" height="8" fill="#1e40af"/>
+    </g>
+  </g>
+  
+  <!-- Texte en bas -->
+  <text x="256" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fbbf24">
+    PORTAIL RH
+  </text>
+  
+  <!-- Étoiles décoratives -->
+  <g fill="#fbbf24" opacity="0.6">
+    <polygon points="100,100 105,115 120,115 108,125 113,140 100,130 87,140 92,125 80,115 95,115" transform="scale(0.8)"/>
+    <polygon points="400,100 405,115 420,115 408,125 413,140 400,130 387,140 392,125 380,115 395,115" transform="scale(0.8)"/>
+    <polygon points="100,400 105,415 120,415 108,425 113,440 100,430 87,440 92,425 80,415 95,415" transform="scale(0.8)"/>
+    <polygon points="400,400 405,415 420,415 408,425 413,440 400,430 387,440 392,425 380,415 395,415" transform="scale(0.8)"/>
+  </g>
+</svg>
