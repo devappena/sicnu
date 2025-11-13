@@ -5,6 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/enarh/', // Important pour GitHub Pages - nom du repo
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
