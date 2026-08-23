@@ -78,12 +78,14 @@ const TopHeader: React.FC<HeaderProps> = ({ title }) => {
 
   const getUserInitials = () => {
     if (!user) return 'U';
-    return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase();
+    const first = user.firstName?.charAt(0) || '';
+    const last = user.lastName?.charAt(0) || user.firstName?.charAt(1) || '';
+    return `${first}${last}`.toUpperCase() || 'U';
   };
 
   const getUserDisplayName = () => {
     if (!user) return 'Utilisateur';
-    return `${user.firstName} ${user.lastName}`;
+    return `${user.firstName} ${user.lastName}`.trim();
   };
 
   const handleSearchClick = () => {

@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { authService } from '@/api';
+import { authConfig } from '@/config/app.config';
 
 interface User {
   id: string;
@@ -17,10 +19,19 @@ interface AuthContextType {
   isLoading: boolean;
 }
 
+const USER_STORAGE_KEY = 'sicnu_user';
+
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
+}
+
+function clearAuthStorage() {
+  localStorage.removeItem(USER_STORAGE_KEY);
+  localStorage.removeItem('ena_user');
+  localStorage.removeItem(authConfig.tokenStorageKey);
+  localStorage.removeItem(authConfig.refreshTokenKey);
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
@@ -28,33 +39,45 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Vérifier si un utilisateur est déjà connecté au chargement
-    const checkAuthStatus = () => {
+    const checkAuthStatus = async () => {
       try {
-        const storedUser = localStorage.getItem('ena_user');
-        if (storedUser) {
-          const userData = JSON.parse(storedUser);
-          setUser(userData);
+        const token = localStorage.getItem(authConfig.tokenStorageKey);
+        if (!token) {
+          localStorage.removeItem(USER_STORAGE_KEY);
+          localStorage.removeItem('ena_user');
+          return;
         }
-      } catch (error) {
-        console.error('Erreur lors de la vérification de l\'authentification:', error);
-        localStorage.removeItem('ena_user');
+
+        const current = await authService.getCurrentUser();
+        const userData: User = {
+          id: current.id,
+          email: current.email,
+          firstName: current.firstName,
+          lastName: current.lastName,
+          role: current.role,
+          loginTime: new Date().toISOString(),
+        };
+        setUser(userData);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
+      } catch {
+        clearAuthStorage();
+        setUser(null);
       } finally {
         setIsLoading(false);
       }
     };
 
-    checkAuthStatus();
+    void checkAuthStatus();
   }, []);
 
   const login = (userData: User) => {
     setUser(userData);
-    localStorage.setItem('ena_user', JSON.stringify(userData));
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('ena_user');
+    void authService.logout();
   };
 
   const value: AuthContextType = {
@@ -62,7 +85,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isAuthenticated: !!user,
     login,
     logout,
-    isLoading
+    isLoading,
   };
 
   return (

@@ -80,7 +80,7 @@ function EmployeeCard({ employee, onView, onEdit, onDelete }: EmployeeCardProps)
       {/* Header avec avatar et statut */}
       <div className="flex items-center justify-between mb-2">
         <div className="w-8 h-8 bg-gradient-to-br from-cnu-blue-500 to-cnu-blue-600 rounded-full flex items-center justify-center text-white font-medium text-xs">
-          {employee.firstName.charAt(0)}{employee.lastName.charAt(0)}
+          {employee.firstName.charAt(0)}{employee.lastName?.charAt(0) || employee.firstName.charAt(1) || ''}
         </div>
         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(employee.status)}`}>
           {getStatusText(employee.status)}

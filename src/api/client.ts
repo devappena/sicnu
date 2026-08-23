@@ -65,16 +65,21 @@ apiClient.interceptors.response.use(
       const message = (error.response.data as any)?.message || error.message;
 
       switch (status) {
-        case 401:
-          // Non authentifié - rediriger vers login
-          if (apiConfig.enableLogging) {
-            console.error('🔒 Unauthorized - Redirecting to login');
+        case 401: {
+          const requestUrl = error.config?.url || '';
+          const isLoginAttempt = requestUrl.includes('/auth/login');
+          if (!isLoginAttempt) {
+            if (apiConfig.enableLogging) {
+              console.error('🔒 Unauthorized - Redirecting to login');
+            }
+            localStorage.removeItem(authConfig.tokenStorageKey);
+            localStorage.removeItem(authConfig.refreshTokenKey);
+            localStorage.removeItem('sicnu_user');
+            const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+            window.location.href = `${basename}/auth/login`;
           }
-          localStorage.removeItem(authConfig.tokenStorageKey);
-          localStorage.removeItem(authConfig.refreshTokenKey);
-          const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
-          window.location.href = `${basename}/auth/login`;
           break;
+        }
 
         case 403:
           // Accès interdit

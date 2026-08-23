@@ -14,7 +14,7 @@ export { default as notificationService } from './services/notification.service'
 export { default as settingsService } from './services/settings.service';
 
 // Export des types - Auth
-export type { LoginCredentials, RegisterCredentials, AuthResponse } from './services/auth.service';
+export type { LoginCredentials, RegisterCredentials, AuthResponse, AuthUser } from './services/auth.service';
 
 // Export des types - Employee
 export type { EmployeeFormData, EmployeeStatistics, ImportResult, EmployeeHistory } from './services/employee.service';

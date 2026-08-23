@@ -2,16 +2,25 @@
 
 Système d’information de la **Commission Nationale de la République Démocratique du Congo pour l’UNESCO** (CNU-RDC).
 
-Application distincte du bureau de l’UNESCO à Kinshasa. Le frontend est une démonstration RH (données mock). L’API réelle n’est pas encore branchée.
+Application distincte du bureau de l’UNESCO à Kinshasa. La connexion et les employés passent par l’API. Absences, formations et paie restent en démonstration.
 
 ## Démarrage
+
+Deux terminaux :
 
 ```bash
 npm install
 npm run dev
 ```
 
-Ouvrir [http://localhost:5173](http://localhost:5173).
+```bash
+cd api
+npm install
+npm run dev
+```
+
+Frontend : [http://localhost:5173](http://localhost:5173).  
+API : [http://localhost:3000/api/health](http://localhost:3000/api/health).
 
 Comptes de démonstration :
 

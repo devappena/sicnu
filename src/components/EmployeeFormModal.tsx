@@ -63,24 +63,24 @@ const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
 
   // Départements disponibles
   const departments = [
-    'Ressources Humaines',
+    'Secrétariat général',
+    'Ressources humaines',
+    'Programmes',
+    'Communication',
     'Finance',
-    'Informatique',
     'Administration',
-    'Formation',
-    'Sécurité',
-    'Maintenance'
+    'Informatique',
   ];
 
   // Postes disponibles par département
   const positionsByDepartment: Record<string, string[]> = {
-    'Ressources Humaines': ['Directeur RH', 'Gestionnaire RH', 'Assistant RH', 'Recruteur'],
-    'Finance': ['Directeur Financier', 'Comptable', 'Analyste Financier', 'Caissier'],
-    'Informatique': ['Directeur IT', 'Développeur', 'Administrateur Système', 'Support Technique'],
-    'Administration': ['Secrétaire', 'Agent Administratif', 'Coordinateur', 'Assistant de Direction'],
-    'Formation': ['Formateur', 'Coordinateur Pédagogique', 'Assistant Formation'],
-    'Sécurité': ['Chef Sécurité', 'Agent de Sécurité', 'Gardien'],
-    'Maintenance': ['Technicien', 'Électricien', 'Plombier', 'Agent d\'Entretien']
+    'Secrétariat général': ['Administrateur', 'Secrétaire générale', 'Assistant de direction'],
+    'Ressources humaines': ['Directrice RH', 'Gestionnaire RH', 'Assistant RH', 'Recruteur'],
+    'Programmes': ['Chargée de programmes', 'Assistant administratif', 'Coordinateur'],
+    'Communication': ['Chargé de communication', 'Attaché de presse'],
+    'Finance': ['Directeur financier', 'Comptable', 'Analyste financier'],
+    'Administration': ['Secrétaire', 'Agent administratif', 'Coordinateur'],
+    'Informatique': ['Développeur', 'Administrateur système', 'Support technique'],
   };
 
   // Initialiser le formulaire quand l'employé change
@@ -183,9 +183,6 @@ const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
     setIsLoading(true);
 
     try {
-      // Simulation d'un appel API
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
       const employeeData = {
         ...formData,
         salary: Number(formData.salary),

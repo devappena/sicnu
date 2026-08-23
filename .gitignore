@@ -13,6 +13,7 @@ dist-ssr
 *.local
 coverage
 api/node_modules
+api/.env
 
 # Editor directories and files
 .vscode/*

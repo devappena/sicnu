@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   UserIcon,
   EnvelopeIcon,
@@ -16,43 +16,27 @@ import { useAuth } from '../../contexts/AuthContext';
 import PageHeader from '../../components/PageHeader';
 import Card from '../../components/Card';
 import { useToast } from '../../hooks/useToast';
-import { useUpdateEmployee, useChangePassword } from '../../hooks/api';
-import { mockEmployees } from '../../data/mockData';
-import { mockUsers } from '../../data/mockUsers';
+import { useEmployee, useUpdateEmployee, useChangePassword } from '../../hooks/api';
 import type { Employee } from '../../types';
 
-function buildProfileEmployee(
+function fallbackEmployee(
   user: { id: string; email: string; firstName: string; lastName: string; role: string } | null
 ): Employee | null {
   if (!user) return null;
-
-  const fromStaff = mockEmployees.find(
-    (employee) => employee.email.toLowerCase() === user.email.toLowerCase()
-  );
-  if (fromStaff) return fromStaff;
-
-  const account = mockUsers.find(
-    (item) => item.id === user.id || item.email.toLowerCase() === user.email.toLowerCase()
-  );
-
   return {
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     phone: '',
-    position: account?.position || user.role,
-    department: account?.department || '',
+    position: user.role,
+    department: '',
     salary: 0,
     hireDate: new Date('2020-01-15'),
     status: 'active',
     address: '',
     dateOfBirth: new Date('1990-01-01'),
-    emergencyContact: {
-      name: '',
-      phone: '',
-      relationship: '',
-    },
+    emergencyContact: { name: '', phone: '', relationship: '' },
   };
 }
 
@@ -60,8 +44,8 @@ const Profile: React.FC = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'info' | 'security' | 'documents'>('info');
-
-  const employee = useMemo(() => buildProfileEmployee(user), [user]);
+  const { data: apiEmployee } = useEmployee(user?.id || '', Boolean(user?.id));
+  const employee = apiEmployee || fallbackEmployee(user);
   const updateEmployee = useUpdateEmployee();
   const changePassword = useChangePassword();
 

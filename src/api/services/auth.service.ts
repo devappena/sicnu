@@ -1,6 +1,17 @@
 import { post, get } from '../client';
+import { authConfig } from '@/config/app.config';
 import type { ApiResponse } from '../types';
 import type { User } from '../../types';
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: User['role'];
+  department?: string;
+  position?: string;
+}
 
 /**
  * Credentials pour la connexion
@@ -26,7 +37,7 @@ export interface RegisterCredentials {
  * Réponse d'authentification
  */
 export interface AuthResponse {
-  user: User;
+  user: AuthUser;
   token: string;
   refreshToken?: string;
   expiresIn: number;
@@ -44,9 +55,9 @@ export const authService = {
     
     // Stocker le token
     if (response.data.token) {
-      localStorage.setItem('auth_token', response.data.token);
+      localStorage.setItem(authConfig.tokenStorageKey, response.data.token);
       if (credentials.rememberMe && response.data.refreshToken) {
-        localStorage.setItem('refresh_token', response.data.refreshToken);
+        localStorage.setItem(authConfig.refreshTokenKey, response.data.refreshToken);
       }
     }
     
@@ -61,7 +72,7 @@ export const authService = {
     
     // Stocker le token après inscription
     if (response.data.token) {
-      localStorage.setItem('auth_token', response.data.token);
+      localStorage.setItem(authConfig.tokenStorageKey, response.data.token);
     }
     
     return response.data;
@@ -75,17 +86,18 @@ export const authService = {
       await post('/auth/logout');
     } finally {
       // Nettoyer le localStorage même si la requête échoue
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('refresh_token');
-      localStorage.removeItem('user');
+      localStorage.removeItem(authConfig.tokenStorageKey);
+      localStorage.removeItem(authConfig.refreshTokenKey);
+      localStorage.removeItem('sicnu_user');
+      localStorage.removeItem('ena_user');
     }
   },
 
   /**
    * Récupérer l'utilisateur actuel
    */
-  getCurrentUser: async (): Promise<User> => {
-    const response = await get<ApiResponse<User>>('/auth/me');
+  getCurrentUser: async (): Promise<AuthUser> => {
+    const response = await get<ApiResponse<AuthUser>>('/auth/me');
     return response.data;
   },
 
@@ -93,7 +105,7 @@ export const authService = {
    * Rafraîchir le token
    */
   refreshToken: async (): Promise<AuthResponse> => {
-    const refreshToken = localStorage.getItem('refresh_token');
+    const refreshToken = localStorage.getItem(authConfig.refreshTokenKey);
     
     if (!refreshToken) {
       throw new Error('No refresh token available');
@@ -105,7 +117,7 @@ export const authService = {
 
     // Mettre à jour le token
     if (response.data.token) {
-      localStorage.setItem('auth_token', response.data.token);
+      localStorage.setItem(authConfig.tokenStorageKey, response.data.token);
     }
 
     return response.data;

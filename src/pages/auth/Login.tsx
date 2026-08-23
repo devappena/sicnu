@@ -6,8 +6,8 @@ import {
 } from '@heroicons/react/24/outline';
 import { useToast } from '../../hooks/useToast';
 import { useAuth } from '../../contexts/AuthContext';
+import { authService } from '../../api';
 import cnuLogo from '../../assets/images/cnu-logo.svg';
-import { authenticateUser } from '../../data/mockUsers';
 import { identity } from '../../config/identity';
 
 const Login: React.FC = () => {
@@ -17,7 +17,8 @@ const Login: React.FC = () => {
   const { login, isAuthenticated, isLoading: authLoading } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    rememberMe: false,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -74,33 +75,45 @@ const Login: React.FC = () => {
 
     setIsLoading(true);
 
-    // Simulation d'authentification avec délai
-    setTimeout(() => {
-      // Authentifier avec le système de mock
-      const authenticatedUser = authenticateUser(formData.email, formData.password);
-      
-      if (authenticatedUser) {
-        const userData = {
-          id: authenticatedUser.id,
-          email: authenticatedUser.email,
-          firstName: authenticatedUser.firstName,
-          lastName: authenticatedUser.lastName,
-          role: authenticatedUser.role,
-          loginTime: new Date().toISOString()
-        };
-        
-        login(userData);
-        showToast('success', 'Connexion réussie !', `Bienvenue ${userData.firstName} ${userData.lastName}`);
-        navigate(from, { replace: true });
+    try {
+      const result = await authService.login({
+        email: formData.email,
+        password: formData.password,
+        rememberMe: formData.rememberMe,
+      });
+
+      const userData = {
+        id: result.user.id,
+        email: result.user.email,
+        firstName: result.user.firstName,
+        lastName: result.user.lastName,
+        role: result.user.role,
+        loginTime: new Date().toISOString(),
+      };
+
+      login(userData);
+      showToast('success', 'Connexion réussie !', `Bienvenue ${userData.firstName} ${userData.lastName}`.trim());
+      navigate(from, { replace: true });
+    } catch (error) {
+      const status = typeof error === 'object' && error && 'status' in error
+        ? Number((error as { status: number }).status)
+        : undefined;
+      const message = typeof error === 'object' && error && 'message' in error
+        ? String((error as { message: string }).message)
+        : 'Email ou mot de passe incorrect';
+
+      if (status === 0) {
+        showToast('error', 'API indisponible', 'Démarrez le backend : cd api && npm run dev');
       } else {
-        showToast('error', 'Erreur de connexion', 'Email ou mot de passe incorrect');
-        setErrors({ 
-          email: 'Identifiants incorrects',
-          password: 'Identifiants incorrects'
-        });
+        showToast('error', 'Erreur de connexion', message);
       }
+      setErrors({
+        email: 'Identifiants incorrects',
+        password: 'Identifiants incorrects',
+      });
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -209,8 +222,10 @@ const Login: React.FC = () => {
                 <div className="flex items-center">
                   <input
                     id="remember-me"
-                    name="remember-me"
+                    name="rememberMe"
                     type="checkbox"
+                    checked={formData.rememberMe}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, rememberMe: e.target.checked }))}
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
