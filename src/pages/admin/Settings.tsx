@@ -13,11 +13,11 @@ const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const [settings, setSettings] = useState({
     profile: {
-      firstName: 'Aline',
-      lastName: 'Kalala',
-      email: 'superadmin@comnat-unesco.cd',
+      firstName: 'Victor',
+      lastName: 'Bafuafua',
+      email: 'admin@shodow.com',
       phone: '+243 999 123 456',
-      position: 'Secrétaire générale',
+      position: 'Administrateur',
       department: 'Administration'
     },
     notifications: {

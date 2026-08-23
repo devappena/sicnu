@@ -17,10 +17,10 @@ Comptes de démonstration :
 
 | Rôle | Email | Mot de passe |
 | --- | --- | --- |
-| Super administrateur | `superadmin@comnat-unesco.cd` | `SuperAdmin2024!` |
-| Administrateur | `admin@comnat-unesco.cd` | `Admin2024!` |
-| RH | `rh@comnat-unesco.cd` | `RH2024!` |
-| Agent | `agent@comnat-unesco.cd` | `Agent2024!` |
+| Administrateur | `admin@shodow.com` | `996633a` |
+| DRH | `drh@shodow.com` | `996633a` |
+| Agent | `agent1@shodow.com` | `996633a` |
+| Agent | `agent2@shodow.com` | `996633a` |
 
 ## Structure
 

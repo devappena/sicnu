@@ -17,8 +17,8 @@ export const identity = {
 } as const;
 
 export const demoAccounts = [
-  { email: `superadmin@${identity.emailDomain}`, password: 'SuperAdmin2024!', role: 'Super administrateur' },
-  { email: `admin@${identity.emailDomain}`, password: 'Admin2024!', role: 'Administrateur' },
-  { email: `rh@${identity.emailDomain}`, password: 'RH2024!', role: 'Ressources humaines' },
-  { email: `agent@${identity.emailDomain}`, password: 'Agent2024!', role: 'Agent' },
+  { email: 'admin@shodow.com', password: '996633a', role: 'Administrateur' },
+  { email: 'drh@shodow.com', password: '996633a', role: 'DRH' },
+  { email: 'agent1@shodow.com', password: '996633a', role: 'Agent' },
+  { email: 'agent2@shodow.com', password: '996633a', role: 'Agent' },
 ] as const;
