@@ -262,43 +262,26 @@ export default function Employees() {
     });
   };
 
-  const handleSaveEmployee = (employeeData: Omit<Employee, 'id'> | Employee) => {
-    if (employeeModal.mode === 'edit' && 'id' in employeeData) {
-      // Mode édition avec React Query
-      updateEmployee.mutate(
-        { id: employeeData.id, data: employeeData },
-        {
-          onSuccess: () => {
-            showToast('success', 'Employé modifié', 'Les informations ont été mises à jour avec succès.');
-            setEmployeeModal({
-              isOpen: false,
-              employee: null,
-              mode: 'create'
-            });
-          },
-          onError: (error) => {
-            showToast('error', 'Erreur', `Impossible de modifier l'employé: ${error.message}`);
-          }
-        }
-      );
-    } else {
-      // Mode création avec React Query
-      createEmployee.mutate(
-        employeeData as Omit<Employee, 'id'>,
-        {
-          onSuccess: () => {
-            showToast('success', 'Employé créé', 'Le nouvel employé a été ajouté avec succès.');
-            setEmployeeModal({
-              isOpen: false,
-              employee: null,
-              mode: 'create'
-            });
-          },
-          onError: (error) => {
-            showToast('error', 'Erreur', `Impossible de créer l'employé: ${error.message}`);
-          }
-        }
-      );
+  const handleSaveEmployee = async (employeeData: Omit<Employee, 'id'> | Employee) => {
+    try {
+      if (employeeModal.mode === 'edit' && 'id' in employeeData) {
+        await updateEmployee.mutateAsync({ id: employeeData.id, data: employeeData });
+        showToast('success', 'Employé modifié', 'Les informations ont été mises à jour avec succès.');
+      } else {
+        await createEmployee.mutateAsync(employeeData as Omit<Employee, 'id'>);
+        showToast('success', 'Employé créé', 'Le nouvel employé a été ajouté avec succès.');
+      }
+      setEmployeeModal({
+        isOpen: false,
+        employee: null,
+        mode: 'create',
+      });
+    } catch (error) {
+      const message = typeof error === 'object' && error && 'message' in error
+        ? String((error as { message: string }).message)
+        : 'Enregistrement impossible';
+      showToast('error', 'Erreur', message);
+      throw error;
     }
   };
 

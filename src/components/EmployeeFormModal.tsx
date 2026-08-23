@@ -12,7 +12,7 @@ import type { Employee } from '../types';
 interface EmployeeFormModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (employee: Omit<Employee, 'id'> | Employee) => void;
+  onSave: (employee: Omit<Employee, 'id'> | Employee) => void | Promise<void>;
   employee?: Employee | null;
   title: string;
 }
@@ -196,12 +196,7 @@ const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
         ...(employee && { id: employee.id })
       };
 
-      onSave(employeeData as Employee);
-      showToast('success', 
-        employee ? 'Employé modifié' : 'Employé créé', 
-        employee ? 'Les informations ont été mises à jour' : 'Le nouvel employé a été ajouté'
-      );
-      onClose();
+      await onSave(employeeData as Employee);
     } catch {
       showToast('error', 'Erreur', 'Une erreur est survenue lors de l\'enregistrement');
     } finally {
