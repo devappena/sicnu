@@ -1,4 +1,4 @@
-// Base de connaissances avancée pour l'IA ENA RH
+// Base de connaissances SICNU / CNU-RDC
 export interface KnowledgeItem {
   id: string;
   category: string;
@@ -14,7 +14,7 @@ export interface KnowledgeItem {
   priority: number; // 1-10, plus élevé = plus prioritaire
 }
 
-export const enaKnowledgeBase: KnowledgeItem[] = [
+export const knowledgeBase: KnowledgeItem[] = [
   // === CONGÉS ET ABSENCES ===
   {
     id: 'conge-demande',
@@ -61,7 +61,7 @@ export const enaKnowledgeBase: KnowledgeItem[] = [
     category: 'Formation',
     keywords: ['budget', 'coût', 'financement', 'prise en charge'],
     question: 'Qui finance les formations ?',
-    answer: 'L\'ENA finance les formations professionnelles dans le cadre du plan de formation. Pour les formations externes, une demande de financement doit être validée par la DRH. Budget annuel individuel : 1500€.',
+    answer: 'La CNU-RDC finance les formations professionnelles dans le cadre du plan de formation. Pour les formations externes, une demande de financement doit être validée par la DRH.',
     actions: [
       { text: 'Demande financement', url: '/contact', type: 'navigation' }
     ],
@@ -75,10 +75,10 @@ export const enaKnowledgeBase: KnowledgeItem[] = [
     category: 'Paie',
     keywords: ['bulletin', 'paie', 'salaire', 'fiche'],
     question: 'Où télécharger mes bulletins de paie ?',
-    answer: 'Téléchargez vos bulletins dans Documents > Paie. Ils sont disponibles le 28 de chaque mois et conservés 5 ans. En cas de problème, contactez paie@ena.gouv.fr avec votre matricule.',
+    answer: 'Téléchargez vos bulletins dans Documents > Paie. Ils sont disponibles le 28 de chaque mois et conservés 5 ans. En cas de problème, contactez paie@comnat-unesco.cd avec votre matricule.',
     actions: [
       { text: 'Mes bulletins', url: '/documents', type: 'navigation' },
-      { text: 'Contacter la paie', url: 'mailto:paie@ena.gouv.fr', type: 'external' }
+      { text: 'Contacter la paie', url: 'mailto:paie@comnat-unesco.cd', type: 'external' }
     ],
     tags: ['bulletin', 'paie', 'téléchargement'],
     priority: 9
@@ -102,9 +102,9 @@ export const enaKnowledgeBase: KnowledgeItem[] = [
     category: 'Horaires',
     keywords: ['horaire', 'heure', 'arrivée', 'départ', 'flexible'],
     question: 'Quels sont les horaires de travail ?',
-    answer: 'Horaires ENA : 8h30-17h30 du lundi au vendredi avec pause déjeuner. Flexibilité possible : arrivée entre 8h-9h30, départ 17h-18h30. 35h/semaine obligatoires.',
+    answer: 'Horaires CNU-RDC : 8h00-16h00 du lundi au vendredi, avec pause déjeuner. 45 h/semaine selon le Code du travail congolais.',
     actions: [
-      { text: 'Mon planning', url: '/timesheet', type: 'navigation' }
+      { text: 'Demande d\'absence', url: '/absences', type: 'navigation' }
     ],
     tags: ['horaires', 'flexibilité', 'planning'],
     priority: 8
@@ -114,7 +114,7 @@ export const enaKnowledgeBase: KnowledgeItem[] = [
     category: 'Horaires',
     keywords: ['télétravail', 'remote', 'domicile', 'distance'],
     question: 'Comment demander le télétravail ?',
-    answer: 'Télétravail possible 2 jours/semaine maximum. Demande via Absences > Télétravail avec justification. Accord du manager requis. Matériel fourni par l\'ENA.',
+    answer: 'Télétravail possible selon accord du responsable. Demande via Absences > Télétravail avec justification.',
     actions: [
       { text: 'Demande télétravail', url: '/absences', type: 'navigation' },
       { text: 'Guide télétravail', url: '/documents', type: 'navigation' }
@@ -144,10 +144,10 @@ export const enaKnowledgeBase: KnowledgeItem[] = [
     category: 'Contact',
     keywords: ['contact', 'rh', 'aide', 'assistance', 'problème'],
     question: 'Comment contacter les RH ?',
-    answer: 'RH ENA : 01.44.41.85.85 (8h30-17h30) ou rh@ena.gouv.fr. Urgences : 01.44.41.85.00. Bureau RH ouvert du lundi au vendredi, rendez-vous conseillé.',
+    answer: 'RH CNU-RDC : rh@comnat-unesco.cd. Bureau RH ouvert du lundi au vendredi, rendez-vous conseillé.',
     actions: [
       { text: 'Prendre RDV', url: '/contact', type: 'navigation' },
-      { text: 'Appeler RH', url: 'tel:0144418585', type: 'external' }
+      { text: 'Écrire aux RH', url: 'mailto:rh@comnat-unesco.cd', type: 'external' }
     ],
     tags: ['contact', 'urgence', 'RH'],
     priority: 10
@@ -158,7 +158,7 @@ export const enaKnowledgeBase: KnowledgeItem[] = [
 export const findBestMatches = (query: string, limit: number = 3): KnowledgeItem[] => {
   const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 2);
   
-  const matches = enaKnowledgeBase.map(item => {
+  const matches = knowledgeBase.map(item => {
     let score = 0;
     
     // Score basé sur les mots-clés

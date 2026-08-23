@@ -183,7 +183,7 @@ const TopHeader: React.FC<HeaderProps> = ({ title }) => {
               >
                 <span className="sr-only">Ouvrir le menu utilisateur</span>
                 <div className="flex items-center space-x-3">
-                  <div className="h-8 w-8 bg-ena-blue-600 border-2 border-yellow-400 rounded-full flex items-center justify-center">
+                  <div className="h-8 w-8 bg-cnu-blue-600 border-2 border-yellow-400 rounded-full flex items-center justify-center">
                     <span className="text-sm font-medium text-white">{getUserInitials()}</span>
                   </div>
                   <div className="hidden md:block text-left">

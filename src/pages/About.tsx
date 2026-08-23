@@ -8,7 +8,8 @@ import {
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 import VersionInfo from '../components/VersionInfo';
-import enaLogo from '../assets/images/ena-logo.png';
+import cnuLogo from '../assets/images/cnu-logo.svg';
+import { identity } from '../config/identity';
 
 const About: React.FC = () => {
   const buildDate = new Date().toLocaleDateString('fr-FR');
@@ -20,7 +21,7 @@ const About: React.FC = () => {
         <div className="mb-8">
           <Link 
             to="/"
-            className="inline-flex items-center text-sm font-medium text-ena-blue hover:text-ena-blue-700 mb-4"
+            className="inline-flex items-center text-sm font-medium text-cnu-blue hover:text-cnu-blue-700 mb-4"
           >
             <ArrowLeftIcon className="h-4 w-4 mr-1" />
             Retour au tableau de bord
@@ -29,16 +30,16 @@ const About: React.FC = () => {
           <div className="text-center">
             <div className="mx-auto h-24 w-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg">
               <img 
-                src={enaLogo} 
-                alt="Logo ENA" 
+                src={cnuLogo} 
+                alt={`Logo ${identity.orgShort}`} 
                 className="h-16 w-16 object-contain"
               />
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">
-              Portail RH ENA
+              {identity.appName}
             </h1>
             <p className="text-xl text-gray-600">
-              École Nationale d'Administration
+              {identity.orgName}
             </p>
           </div>
         </div>
@@ -48,7 +49,7 @@ const About: React.FC = () => {
           {/* Version Card */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center mb-4">
-              <InformationCircleIcon className="h-8 w-8 text-ena-blue mr-3" />
+              <InformationCircleIcon className="h-8 w-8 text-cnu-blue mr-3" />
               <h2 className="text-xl font-semibold text-gray-900">Informations Version</h2>
             </div>
             <div className="space-y-3">
@@ -72,7 +73,7 @@ const About: React.FC = () => {
           {/* Technologies Card */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center mb-4">
-              <CodeBracketIcon className="h-8 w-8 text-ena-blue mr-3" />
+              <CodeBracketIcon className="h-8 w-8 text-cnu-blue mr-3" />
               <h2 className="text-xl font-semibold text-gray-900">Technologies</h2>
             </div>
             <div className="space-y-2">
@@ -98,7 +99,7 @@ const About: React.FC = () => {
           {/* Security Card */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center mb-4">
-              <ShieldCheckIcon className="h-8 w-8 text-ena-blue mr-3" />
+              <ShieldCheckIcon className="h-8 w-8 text-cnu-blue mr-3" />
               <h2 className="text-xl font-semibold text-gray-900">Sécurité</h2>
             </div>
             <div className="space-y-2">
@@ -120,7 +121,7 @@ const About: React.FC = () => {
           {/* System Info Card */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center mb-4">
-              <ServerIcon className="h-8 w-8 text-ena-blue mr-3" />
+              <ServerIcon className="h-8 w-8 text-cnu-blue mr-3" />
               <h2 className="text-xl font-semibold text-gray-900">Système</h2>
             </div>
             <div className="space-y-2">
@@ -144,7 +145,7 @@ const About: React.FC = () => {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Fonctionnalités Principales</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="p-4 bg-ena-blue/10 rounded-lg">
+            <div className="p-4 bg-cnu-blue/10 rounded-lg">
               <h3 className="font-medium text-gray-900 mb-2">Gestion du Personnel</h3>
               <p className="text-sm text-gray-600">Profils employés, évaluations, et gestion des équipes</p>
             </div>
@@ -173,8 +174,8 @@ const About: React.FC = () => {
 
         {/* Footer */}
         <div className="text-center text-gray-500 text-sm">
-          <p>© 2025 École Nationale d'Administration (ENA) - Tous droits réservés</p>
-          <p className="mt-1">Développé par victor bafuafua pour la modernisation de l'administration congolaise</p>
+          <p>© {new Date().getFullYear()} {identity.orgName} — Tous droits réservés</p>
+          <p className="mt-1">{identity.appFullName}</p>
         </div>
       </div>
     </div>

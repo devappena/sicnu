@@ -30,7 +30,7 @@ export default function ExportMenu({
   data = [], 
   elementId, 
   filename = 'export', 
-  title = 'Données ENA',
+  title = 'Données CNU-RDC',
   onExport,
   className = '' 
 }: ExportMenuProps) {
@@ -281,7 +281,7 @@ export default function ExportMenu({
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isExporting}
-        className="flex items-center space-x-2 px-4 py-2 bg-ena-blue-600 text-white rounded-lg hover:bg-ena-blue-700 transition-colors disabled:opacity-50"
+        className="flex items-center space-x-2 px-4 py-2 bg-cnu-blue-600 text-white rounded-lg hover:bg-cnu-blue-700 transition-colors disabled:opacity-50"
       >
         <DocumentArrowDownIcon className="h-5 w-5" />
         <span>{isExporting ? 'Export en cours...' : 'Exporter'}</span>

@@ -26,12 +26,9 @@ export type Permission =
   | 'view_evaluations'
   | 'create_evaluation'
   | 'view_statistics'
-  | 'view_advanced_statistics'
   | 'manage_workflow'
   | 'view_notifications'
   | 'manage_settings'
-  | 'view_timesheet'
-  | 'approve_timesheet'
   | 'request_role_change'
   | 'approve_role_change';
 
@@ -63,12 +60,9 @@ export const rolePermissions: Record<UserRole, Permission[]> = {
     'view_evaluations',
     'create_evaluation',
     'view_statistics',
-    'view_advanced_statistics',
     'manage_workflow',
     'view_notifications',
     'manage_settings',
-    'view_timesheet',
-    'approve_timesheet',
     'request_role_change',
     'approve_role_change',
   ],
@@ -93,11 +87,8 @@ export const rolePermissions: Record<UserRole, Permission[]> = {
     'view_evaluations',
     'create_evaluation',
     'view_statistics',
-    'view_advanced_statistics',
     'manage_workflow',
     'view_notifications',
-    'view_timesheet',
-    'approve_timesheet',
     'approve_role_change',
   ],
 
@@ -118,8 +109,6 @@ export const rolePermissions: Record<UserRole, Permission[]> = {
     'create_evaluation',
     'view_statistics',
     'view_notifications',
-    'view_timesheet',
-    'approve_timesheet',
   ],
 
   // Employee - Consultation et gestion personnelle
@@ -132,7 +121,6 @@ export const rolePermissions: Record<UserRole, Permission[]> = {
     'view_documents',
     'view_evaluations', // Voir ses propres évaluations
     'view_notifications',
-    'view_timesheet', // Gérer son propre timesheet
     'request_role_change', // Demander un changement de rôle
   ],
 };
@@ -144,22 +132,20 @@ export const rolePermissions: Record<UserRole, Permission[]> = {
 export const pageAccess: Record<string, UserRole[]> = {
   // Pages accessibles à tous les utilisateurs authentifiés
   '/': ['super_admin', 'admin', 'hr', 'employee'],
-  '/dashboard-optimized': ['super_admin', 'admin', 'hr', 'employee'],
   '/search': ['super_admin', 'admin', 'hr', 'employee'],
   '/profile': ['super_admin', 'admin', 'hr', 'employee'],
   '/notifications': ['super_admin', 'admin', 'hr', 'employee'],
 
   // Pages employés (vue limitée pour employee)
   '/employees': ['super_admin', 'admin', 'hr', 'employee'],
+  '/organization': ['super_admin', 'admin', 'hr', 'employee'],
+  '/attendance': ['super_admin', 'admin', 'hr', 'employee'],
   
   // Pages absences
   '/absences': ['super_admin', 'admin', 'hr', 'employee'],
   
   // Pages formations
   '/trainings': ['super_admin', 'admin', 'hr', 'employee'],
-  
-  // Pages timesheet
-  '/timesheet': ['super_admin', 'admin', 'hr', 'employee'],
   
   // Pages documents
   '/documents': ['super_admin', 'admin', 'hr', 'employee'],
@@ -172,10 +158,13 @@ export const pageAccess: Record<string, UserRole[]> = {
 
   // Pages paie (seulement admin et super_admin)
   '/payroll': ['super_admin', 'admin'],
+  '/compliance': ['super_admin', 'admin', 'hr'],
+  '/expenses': ['super_admin', 'admin', 'hr'],
+  '/recruitment': ['super_admin', 'admin', 'hr'],
+  '/onboarding': ['super_admin', 'admin', 'hr'],
 
   // Pages statistiques (pas pour employee)
   '/statistics': ['super_admin', 'admin', 'hr'],
-  '/statistics-advanced': ['super_admin', 'admin'],
 
   // Pages workflow (admin seulement)
   '/workflow-management': ['super_admin', 'admin'],

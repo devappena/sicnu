@@ -4,12 +4,13 @@ import Sidebar from './Sidebar';
 import TopHeader from './TopHeader';
 import { useTheme } from '../hooks/useTheme';
 import { useSidebar } from '../contexts/SidebarContext';
+import { identity } from '../config/identity';
 
 interface LayoutProps {
   title?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ title = 'ENA Portail RH' }) => {
+const Layout: React.FC<LayoutProps> = ({ title = identity.appName }) => {
   const { isDarkMode } = useTheme();
   const { isOpen, isMobile, closeSidebar } = useSidebar();
 

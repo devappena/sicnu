@@ -7,6 +7,7 @@ import { employeeService } from '@/api';
 import type { EmployeeFormData, PaginationParams } from '@/api';
 import { config } from '@/config/devConfig';
 import { mockEmployees } from '@/data/mockData';
+import { unwrapList } from './unwrapList';
 
 // Clés de requête
 export const employeeKeys = {
@@ -37,6 +38,7 @@ export function useEmployees(params?: PaginationParams) {
       }
       return employeeService.getAll(params);
     },
+    select: unwrapList,
     staleTime: 2 * 60 * 1000,
   });
 }
@@ -44,7 +46,17 @@ export function useEmployees(params?: PaginationParams) {
 export function useEmployee(id: string, enabled = true) {
   return useQuery({
     queryKey: employeeKeys.detail(id),
-    queryFn: () => employeeService.getById(id),
+    queryFn: async () => {
+      if (config.USE_MOCK_DATA) {
+        await new Promise((resolve) => setTimeout(resolve, config.MOCK_DELAY));
+        const found = mockEmployees.find((employee) => employee.id === id);
+        if (!found) {
+          throw new Error('Employé introuvable');
+        }
+        return found;
+      }
+      return employeeService.getById(id);
+    },
     enabled: enabled && !!id,
     staleTime: 5 * 60 * 1000,
   });
@@ -68,8 +80,18 @@ export function useUpdateEmployee() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: Partial<EmployeeFormData> }) =>
-      employeeService.update(id, data),
+    mutationFn: async ({ id, data }: { id: string; data: Partial<EmployeeFormData> }) => {
+      if (config.USE_MOCK_DATA) {
+        await new Promise((resolve) => setTimeout(resolve, config.MOCK_DELAY));
+        const current = mockEmployees.find((employee) => employee.id === id);
+        return {
+          ...(current ?? { id }),
+          ...data,
+          id,
+        };
+      }
+      return employeeService.update(id, data);
+    },
     onSuccess: (response, variables) => {
       queryClient.setQueryData(employeeKeys.detail(variables.id), response);
       queryClient.invalidateQueries({ queryKey: employeeKeys.lists() });

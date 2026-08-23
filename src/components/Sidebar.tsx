@@ -10,10 +10,15 @@ import {
   BellIcon,
   CogIcon,
   DocumentTextIcon,
-  ClockIcon,
   BanknotesIcon,
   ShieldCheckIcon,
-  ArrowPathIcon
+  ArrowPathIcon,
+  BriefcaseIcon,
+  BuildingOfficeIcon,
+  ClockIcon,
+  UserPlusIcon,
+  ReceiptPercentIcon,
+  ScaleIcon
 } from '@heroicons/react/24/outline';
 import { 
   HomeIcon as HomeIconSolid, 
@@ -25,15 +30,22 @@ import {
   BellIcon as BellIconSolid,
   CogIcon as CogIconSolid,
   DocumentTextIcon as DocumentTextIconSolid,
-  ClockIcon as ClockIconSolid,
   BanknotesIcon as BanknotesIconSolid,
   ShieldCheckIcon as ShieldCheckIconSolid,
-  ArrowPathIcon as ArrowPathIconSolid
+  ArrowPathIcon as ArrowPathIconSolid,
+  BriefcaseIcon as BriefcaseIconSolid,
+  BuildingOfficeIcon as BuildingOfficeIconSolid,
+  ClockIcon as ClockIconSolid,
+  UserPlusIcon as UserPlusIconSolid,
+  ReceiptPercentIcon as ReceiptPercentIconSolid,
+  ScaleIcon as ScaleIconSolid
 } from '@heroicons/react/24/solid';
 import Logo from './Logo';
 import VersionInfo from './VersionInfo';
 import { useTheme } from '../hooks/useTheme';
 import { useSidebar } from '../contexts/SidebarContext';
+import { useAuth } from '../contexts/AuthContext';
+import { usePermissions } from '../hooks/usePermissions';
 
 interface NavigationItem {
   name: string;
@@ -51,16 +63,28 @@ const navigation: NavigationItem[] = [
     iconActive: HomeIconSolid 
   },
   { 
-    name: 'Analytics Avancé', 
-    href: '/dashboard-advanced', 
-    icon: ChartBarIcon, 
-    iconActive: ChartBarIconSolid 
-  },
-  { 
     name: 'Employés', 
     href: '/employees', 
     icon: UsersIcon, 
     iconActive: UsersIconSolid 
+  },
+  { 
+    name: 'Organigramme', 
+    href: '/organization', 
+    icon: BuildingOfficeIcon, 
+    iconActive: BuildingOfficeIconSolid 
+  },
+  { 
+    name: 'Recrutement', 
+    href: '/recruitment', 
+    icon: BriefcaseIcon, 
+    iconActive: BriefcaseIconSolid 
+  },
+  { 
+    name: 'Intégration', 
+    href: '/onboarding', 
+    icon: UserPlusIcon, 
+    iconActive: UserPlusIconSolid 
   },
   { 
     name: 'Absences', 
@@ -69,22 +93,28 @@ const navigation: NavigationItem[] = [
     iconActive: CalendarDaysIconSolid 
   },
   { 
+    name: 'Présences', 
+    href: '/attendance', 
+    icon: ClockIcon, 
+    iconActive: ClockIconSolid 
+  },
+  { 
     name: 'Formations', 
     href: '/trainings', 
     icon: AcademicCapIcon, 
     iconActive: AcademicCapIconSolid 
   },
   { 
-    name: 'Feuille de temps', 
-    href: '/timesheet', 
-    icon: ClockIcon, 
-    iconActive: ClockIconSolid 
-  },
-  { 
     name: 'Paie', 
     href: '/payroll', 
     icon: BanknotesIcon, 
     iconActive: BanknotesIconSolid 
+  },
+  { 
+    name: 'Notes de frais', 
+    href: '/expenses', 
+    icon: ReceiptPercentIcon, 
+    iconActive: ReceiptPercentIconSolid 
   },
   { 
     name: 'Documents', 
@@ -105,10 +135,10 @@ const navigation: NavigationItem[] = [
     iconActive: ChartBarIconSolid 
   },
   { 
-    name: 'Stats Avancées', 
-    href: '/statistics-advanced', 
-    icon: ChartBarIcon, 
-    iconActive: ChartBarIconSolid 
+    name: 'Conformité', 
+    href: '/compliance', 
+    icon: ScaleIcon, 
+    iconActive: ScaleIconSolid 
   },
   { 
     name: 'Workflows', 
@@ -144,6 +174,11 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
   const { isDarkMode } = useTheme();
   const { isOpen, isMobile, isCollapsed, closeSidebar } = useSidebar();
+  const { user } = useAuth();
+  const { canAccessPage } = usePermissions();
+
+  const visibleNavigation = navigation.filter((item) => canAccessPage(item.href));
+  const visibleSecondary = secondaryNavigation.filter((item) => canAccessPage(item.href));
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -195,7 +230,7 @@ const Sidebar: React.FC = () => {
       <nav className="flex-1 px-2 pb-4 space-y-1 overflow-y-auto sidebar-scroll">
         {/* Primary Navigation */}
         <div className="space-y-1 pt-4">
-          {navigation.map((item) => {
+          {visibleNavigation.map((item) => {
             const Icon = isActive(item.href) ? item.iconActive : item.icon;
             return (
               <Link
@@ -235,7 +270,7 @@ const Sidebar: React.FC = () => {
         {/* Secondary Navigation */}
         <div className="pt-4 mt-4 border-t border-white border-opacity-20">
           <div className="space-y-1">
-            {secondaryNavigation.map((item) => {
+            {visibleSecondary.map((item) => {
               const Icon = isActive(item.href) ? item.iconActive : item.icon;
               return (
                 <Link
@@ -288,17 +323,19 @@ const Sidebar: React.FC = () => {
       <div className={`border-t ${isDarkMode ? 'border-slate-600' : 'border-blue-700'} border-opacity-30 p-4`}>
         <div className={`flex items-center ${isCollapsed && !isMobile ? 'justify-center' : 'space-x-3'}`}>
           <div className="flex-shrink-0">
-            <div className="w-10 h-10 rounded-lg bg-ena-blue-600 border-2 border-yellow-400 flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">VB</span>
+            <div className="w-10 h-10 rounded-lg bg-cnu-blue-600 border-2 border-yellow-400 flex items-center justify-center">
+              <span className="text-white font-semibold text-sm">
+                {`${user?.firstName?.[0] ?? ''}${user?.lastName?.[0] ?? ''}`.toUpperCase() || 'RH'}
+              </span>
             </div>
           </div>
           {(!isCollapsed || isMobile) && (
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-white truncate">
-                Victor Bafuafua
+                {user ? `${user.firstName} ${user.lastName}` : 'Utilisateur'}
               </p>
               <p className={`text-xs ${isDarkMode ? 'text-slate-400' : 'text-blue-200'} truncate`}>
-                Directeur Administratif
+                {user?.email || ''}
               </p>
             </div>
           )}

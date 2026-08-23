@@ -13,11 +13,11 @@ const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const [settings, setSettings] = useState({
     profile: {
-      firstName: 'Bafuafua Mande',
-      lastName: 'Victor',
-      email: 'bafuafua.victor@ena.cd',
+      firstName: 'Aline',
+      lastName: 'Kalala',
+      email: 'superadmin@comnat-unesco.cd',
       phone: '+243 999 123 456',
-      position: 'Directeur Administratif',
+      position: 'Secrétaire générale',
       department: 'Administration'
     },
     notifications: {
@@ -69,7 +69,7 @@ const Settings: React.FC = () => {
               type="text"
               value={settings.profile.firstName}
               onChange={(e) => updateSetting('profile', 'firstName', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             />
           </div>
           <div>
@@ -78,7 +78,7 @@ const Settings: React.FC = () => {
               type="text"
               value={settings.profile.lastName}
               onChange={(e) => updateSetting('profile', 'lastName', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             />
           </div>
           <div>
@@ -87,7 +87,7 @@ const Settings: React.FC = () => {
               type="email"
               value={settings.profile.email}
               onChange={(e) => updateSetting('profile', 'email', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             />
           </div>
           <div>
@@ -96,7 +96,7 @@ const Settings: React.FC = () => {
               type="tel"
               value={settings.profile.phone}
               onChange={(e) => updateSetting('profile', 'phone', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             />
           </div>
           <div>
@@ -121,7 +121,7 @@ const Settings: React.FC = () => {
       </div>
       
       <div className="pt-6 border-t border-gray-200">
-        <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-ena-blue-600 hover:bg-ena-blue-700">
+        <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-cnu-blue-600 hover:bg-cnu-blue-700">
           Sauvegarder les modifications
         </button>
       </div>
@@ -153,7 +153,7 @@ const Settings: React.FC = () => {
                 <button
                   onClick={() => updateSetting('notifications', key, !value)}
                   className={`relative inline-flex h-6 w-11 items-center rounded-full ${
-                    value ? 'bg-ena-blue-600' : 'bg-gray-200'
+                    value ? 'bg-cnu-blue-600' : 'bg-gray-200'
                   }`}
                 >
                   <span
@@ -187,7 +187,7 @@ const Settings: React.FC = () => {
             <button
               onClick={() => updateSetting('security', 'twoFactorAuth', !settings.security.twoFactorAuth)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full ${
-                settings.security.twoFactorAuth ? 'bg-ena-blue-600' : 'bg-gray-200'
+                settings.security.twoFactorAuth ? 'bg-cnu-blue-600' : 'bg-gray-200'
               }`}
             >
               <span
@@ -205,7 +205,7 @@ const Settings: React.FC = () => {
             <select
               value={settings.security.sessionTimeout}
               onChange={(e) => updateSetting('security', 'sessionTimeout', parseInt(e.target.value))}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             >
               <option value={15}>15 minutes</option>
               <option value={30}>30 minutes</option>
@@ -221,7 +221,7 @@ const Settings: React.FC = () => {
             <select
               value={settings.security.passwordExpiry}
               onChange={(e) => updateSetting('security', 'passwordExpiry', parseInt(e.target.value))}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             >
               <option value={30}>30 jours</option>
               <option value={60}>60 jours</option>
@@ -233,7 +233,7 @@ const Settings: React.FC = () => {
       </div>
       
       <div className="pt-6 border-t border-gray-200">
-        <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-ena-blue-600 hover:bg-ena-blue-700 mr-3">
+        <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-cnu-blue-600 hover:bg-cnu-blue-700 mr-3">
           <KeyIcon className="h-4 w-4 mr-2" />
           Changer le mot de passe
         </button>
@@ -255,7 +255,7 @@ const Settings: React.FC = () => {
             <select
               value={settings.appearance.theme}
               onChange={(e) => updateSetting('appearance', 'theme', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             >
               <option value="light">Clair</option>
               <option value="dark">Sombre</option>
@@ -268,7 +268,7 @@ const Settings: React.FC = () => {
             <select
               value={settings.appearance.language}
               onChange={(e) => updateSetting('appearance', 'language', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             >
               <option value="fr">Français</option>
               <option value="en">English</option>
@@ -281,7 +281,7 @@ const Settings: React.FC = () => {
             <select
               value={settings.appearance.dateFormat}
               onChange={(e) => updateSetting('appearance', 'dateFormat', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             >
               <option value="dd/MM/yyyy">DD/MM/YYYY</option>
               <option value="MM/dd/yyyy">MM/DD/YYYY</option>
@@ -294,7 +294,7 @@ const Settings: React.FC = () => {
             <select
               value={settings.appearance.timezone}
               onChange={(e) => updateSetting('appearance', 'timezone', e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-ena-blue-500 focus:border-ena-blue-500"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
             >
               <option value="Africa/Kinshasa">Africa/Kinshasa (WAT)</option>
               <option value="Africa/Lubumbashi">Africa/Lubumbashi (CAT)</option>
@@ -361,7 +361,7 @@ const Settings: React.FC = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md text-left ${
                       activeTab === tab.id
-                        ? 'bg-ena-blue-50 text-ena-blue-700 border-r-2 border-ena-blue-700'
+                        ? 'bg-cnu-blue-50 text-cnu-blue-700 border-r-2 border-cnu-blue-700'
                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >

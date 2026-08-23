@@ -7,6 +7,7 @@ import { trainingService } from '@/api';
 import type { TrainingFormData, PaginationParams } from '@/api';
 import { config } from '@/config/devConfig';
 import { mockTrainings } from '@/data/mockData';
+import { unwrapList } from './unwrapList';
 
 // Clés de requête pour le cache
 export const trainingKeys = {
@@ -51,6 +52,7 @@ export function useTrainings(params?: PaginationParams & {
       }
       return trainingService.getAll(params);
     },
+    select: unwrapList,
     staleTime: 3 * 60 * 1000, // 3 minutes
   });
 }

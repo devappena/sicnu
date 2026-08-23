@@ -12,7 +12,7 @@ vi.mock('@/contexts/AuthContext', () => ({
 describe('usePermissions', () => {
   it('devrait retourner les permissions pour super_admin', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '1', email: 'admin@ena.cd', role: 'super_admin' },
+      user: { id: '1', email: 'admin@comnat-unesco.cd', role: 'super_admin' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -35,7 +35,7 @@ describe('usePermissions', () => {
 
   it('devrait retourner les permissions pour admin', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '2', email: 'admin@ena.cd', role: 'admin' },
+      user: { id: '2', email: 'admin@comnat-unesco.cd', role: 'admin' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -52,7 +52,7 @@ describe('usePermissions', () => {
     expect(result.current.canDeleteEmployee).toBe(true);
     expect(result.current.canManagePayroll).toBe(true);
     expect(result.current.canApproveAbsence).toBe(true);
-    expect(result.current.canViewAdvancedStatistics).toBe(true);
+    expect(result.current.canViewStatistics).toBe(true);
 
     // Pas de settings
     expect(result.current.canManageSettings).toBe(false);
@@ -60,7 +60,7 @@ describe('usePermissions', () => {
 
   it('devrait retourner les permissions pour hr', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '3', email: 'hr@ena.cd', role: 'hr' },
+      user: { id: '3', email: 'hr@comnat-unesco.cd', role: 'hr' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -82,13 +82,13 @@ describe('usePermissions', () => {
     expect(result.current.canCreateEmployee).toBe(false);
     expect(result.current.canDeleteEmployee).toBe(false);
     expect(result.current.canManagePayroll).toBe(false);
-    expect(result.current.canViewAdvancedStatistics).toBe(false);
+    expect(result.current.canViewStatistics).toBe(true);
     expect(result.current.canManageSettings).toBe(false);
   });
 
   it('devrait retourner les permissions pour employee', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '4', email: 'employee@ena.cd', role: 'employee' },
+      user: { id: '4', email: 'employee@comnat-unesco.cd', role: 'employee' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -117,7 +117,7 @@ describe('usePermissions', () => {
 
   it('devrait retourner les labels et couleurs corrects', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '1', email: 'admin@ena.cd', role: 'super_admin' },
+      user: { id: '1', email: 'admin@comnat-unesco.cd', role: 'super_admin' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -145,7 +145,7 @@ describe('usePermissions', () => {
 
   it('devrait vérifier l\'accès aux pages', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '2', email: 'admin@ena.cd', role: 'admin' },
+      user: { id: '2', email: 'admin@comnat-unesco.cd', role: 'admin' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -159,7 +159,7 @@ describe('usePermissions', () => {
 
   it('devrait vérifier les rôles multiples', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '3', email: 'hr@ena.cd', role: 'hr' },
+      user: { id: '3', email: 'hr@comnat-unesco.cd', role: 'hr' },
       isAuthenticated: true,
       isLoading: false,
     } as any);
@@ -172,7 +172,7 @@ describe('usePermissions', () => {
 
   it('devrait vérifier la gestion de rôles', () => {
     vi.mocked(AuthContext.useAuth).mockReturnValue({
-      user: { id: '2', email: 'admin@ena.cd', role: 'admin' },
+      user: { id: '2', email: 'admin@comnat-unesco.cd', role: 'admin' },
       isAuthenticated: true,
       isLoading: false,
     } as any);

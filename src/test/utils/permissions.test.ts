@@ -70,14 +70,14 @@ describe('permissions - canAccessPage', () => {
     expect(canAccessPage('super_admin', '/employees')).toBe(true);
     expect(canAccessPage('super_admin', '/payroll')).toBe(true);
     expect(canAccessPage('super_admin', '/settings')).toBe(true);
-    expect(canAccessPage('super_admin', '/statistics-advanced')).toBe(true);
+    expect(canAccessPage('super_admin', '/statistics')).toBe(true);
   });
 
   it('admin peut accéder aux pages admin', () => {
     expect(canAccessPage('admin', '/')).toBe(true);
     expect(canAccessPage('admin', '/employees')).toBe(true);
     expect(canAccessPage('admin', '/payroll')).toBe(true);
-    expect(canAccessPage('admin', '/statistics-advanced')).toBe(true);
+    expect(canAccessPage('admin', '/statistics')).toBe(true);
     expect(canAccessPage('admin', '/workflow-management')).toBe(true);
   });
 
@@ -93,9 +93,8 @@ describe('permissions - canAccessPage', () => {
     expect(canAccessPage('hr', '/statistics')).toBe(true);
   });
 
-  it('hr ne peut PAS accéder à la paie et stats avancées', () => {
+  it('hr ne peut PAS accéder à la paie et aux paramètres', () => {
     expect(canAccessPage('hr', '/payroll')).toBe(false);
-    expect(canAccessPage('hr', '/statistics-advanced')).toBe(false);
     expect(canAccessPage('hr', '/settings')).toBe(false);
     expect(canAccessPage('hr', '/workflow-management')).toBe(false);
   });
@@ -111,7 +110,7 @@ describe('permissions - canAccessPage', () => {
   it('employee ne peut PAS accéder aux pages admin', () => {
     expect(canAccessPage('employee', '/payroll')).toBe(false);
     expect(canAccessPage('employee', '/statistics')).toBe(false);
-    expect(canAccessPage('employee', '/statistics-advanced')).toBe(false);
+    expect(canAccessPage('employee', '/recruitment')).toBe(false);
     expect(canAccessPage('employee', '/settings')).toBe(false);
     expect(canAccessPage('employee', '/workflow-management')).toBe(false);
   });

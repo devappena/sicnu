@@ -6,8 +6,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { useToast } from '../../hooks/useToast';
 import { useAuth } from '../../contexts/AuthContext';
-import enaLogo from '../../assets/images/ena-logo.png';
+import cnuLogo from '../../assets/images/cnu-logo.svg';
 import { authenticateUser } from '../../data/mockUsers';
+import { demoAccounts, identity } from '../../config/identity';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -103,14 +104,14 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-ena-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8">
+    <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-cnu-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8">
       {/* Écran de chargement pendant la vérification de l'authentification */}
       {authLoading ? (
         <div className="text-center">
           <div className="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center mb-4 p-2 animate-pulse">
             <img 
-              src={enaLogo} 
-              alt="Logo ENA" 
+              src={cnuLogo} 
+              alt={`Logo ${identity.orgShort}`} 
               className="h-full w-full object-contain"
             />
           </div>
@@ -122,16 +123,19 @@ const Login: React.FC = () => {
           <div className="text-center mb-8">
             <div className="mx-auto h-16 w-16 bg-white rounded-full flex items-center justify-center mb-3 p-2">
               <img 
-                src={enaLogo} 
-                alt="Logo ENA" 
+                src={cnuLogo} 
+                alt={`Logo ${identity.orgShort}`} 
                 className="h-full w-full object-contain"
               />
             </div>
             <h2 className="text-2xl font-bold text-white">
-              Portail RH ENA
+              {identity.appName}
             </h2>
             <p className="mt-1 text-blue-100 text-sm">
-              École Nationale d'Administration
+              {identity.orgShort}
+            </p>
+            <p className="mt-1 text-blue-200 text-xs">
+              {identity.appFullName}
             </p>
           </div>
 
@@ -160,7 +164,7 @@ const Login: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`input-field ${errors.email ? 'border-red-500' : ''}`}
-                  placeholder="votre.email@ena.cd"
+                  placeholder="votre.email@comnat-unesco.cd"
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -215,7 +219,7 @@ const Login: React.FC = () => {
                 </div>
 
                 <div className="text-sm">
-                  <Link to="/auth/forgot-password" className="font-medium text-ena-blue hover:text-ena-blue-700">
+                  <Link to="/auth/forgot-password" className="font-medium text-cnu-blue hover:text-cnu-blue-700">
                     Mot de passe oublié ?
                   </Link>
                 </div>
@@ -225,7 +229,7 @@ const Login: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-ena-blue to-ena-blue-700 hover:from-ena-blue-700 hover:to-ena-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-cnu-blue to-cnu-blue-700 hover:from-cnu-blue-700 hover:to-cnu-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
               >
                 {isLoading ? (
                   <div className="flex items-center">
@@ -246,11 +250,27 @@ const Login: React.FC = () => {
               </button>
             </form>
 
-            {/* Lien d'inscription */}
+            <div className="mt-6 rounded-lg bg-slate-50 p-4 text-left">
+              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
+                Comptes de démonstration
+              </p>
+              <ul className="space-y-1.5 text-xs text-slate-700">
+                {demoAccounts.map((account) => (
+                  <li key={account.email}>
+                    <span className="font-medium">{account.role}</span>
+                    {' — '}
+                    <span className="font-mono">{account.email}</span>
+                    {' / '}
+                    <span className="font-mono">{account.password}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Pas encore de compte ?{' '}
-                <Link to="/auth/register" className="font-medium text-ena-blue hover:text-ena-blue-700">
+                <Link to="/auth/register" className="font-medium text-cnu-blue hover:text-cnu-blue-700">
                   Créer un compte
                 </Link>
               </p>

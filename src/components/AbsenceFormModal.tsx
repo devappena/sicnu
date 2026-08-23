@@ -172,8 +172,8 @@ export default function AbsenceFormModal({
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-ena-blue-100 rounded-lg">
-                <CalendarIcon className="w-6 h-6 text-ena-blue-600" />
+              <div className="p-2 bg-cnu-blue-100 rounded-lg">
+                <CalendarIcon className="w-6 h-6 text-cnu-blue-600" />
               </div>
               <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 Nouvelle demande d'absence
@@ -204,7 +204,7 @@ export default function AbsenceFormModal({
                     className={`
                       relative flex items-center p-4 border rounded-lg cursor-pointer transition-all
                       ${formData.type === type.value
-                        ? 'border-ena-blue-500 bg-ena-blue-50 ring-2 ring-ena-blue-200'
+                        ? 'border-cnu-blue-500 bg-cnu-blue-50 ring-2 ring-cnu-blue-200'
                         : isDarkMode 
                           ? 'border-slate-600 bg-slate-700 hover:bg-slate-600' 
                           : 'border-gray-200 bg-white hover:bg-gray-50'
@@ -242,7 +242,7 @@ export default function AbsenceFormModal({
                   value={formData.startDate}
                   onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white' 
                       : 'bg-white border-gray-300 text-gray-900'
@@ -264,7 +264,7 @@ export default function AbsenceFormModal({
                   value={formData.endDate}
                   onChange={(e) => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white' 
                       : 'bg-white border-gray-300 text-gray-900'
@@ -281,12 +281,12 @@ export default function AbsenceFormModal({
             {/* Durée calculée */}
             {calculateDuration() > 0 && (
               <div className={`
-                p-3 rounded-lg border-l-4 border-ena-blue-500 
-                ${isDarkMode ? 'bg-slate-700' : 'bg-ena-blue-50'}
+                p-3 rounded-lg border-l-4 border-cnu-blue-500 
+                ${isDarkMode ? 'bg-slate-700' : 'bg-cnu-blue-50'}
               `}>
                 <div className="flex items-center">
-                  <CalendarIcon className="w-5 h-5 text-ena-blue-600 mr-2" />
-                  <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-ena-blue-800'}`}>
+                  <CalendarIcon className="w-5 h-5 text-cnu-blue-600 mr-2" />
+                  <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-cnu-blue-800'}`}>
                     Durée: {calculateDuration()} jour{calculateDuration() > 1 ? 's' : ''}
                   </span>
                 </div>
@@ -304,7 +304,7 @@ export default function AbsenceFormModal({
                 rows={4}
                 placeholder="Expliquez la raison de votre demande d'absence..."
                 className={`
-                  w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                  w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                   ${isDarkMode 
                     ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' 
                     : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -336,7 +336,7 @@ export default function AbsenceFormModal({
               `}>
                 <DocumentArrowUpIcon className={`mx-auto h-8 w-8 mb-2 ${isDarkMode ? 'text-slate-400' : 'text-gray-400'}`} />
                 <label className="cursor-pointer">
-                  <span className={`text-sm font-medium ${isDarkMode ? 'text-ena-blue-400' : 'text-ena-blue-600'}`}>
+                  <span className={`text-sm font-medium ${isDarkMode ? 'text-cnu-blue-400' : 'text-cnu-blue-600'}`}>
                     Cliquer pour ajouter des fichiers
                   </span>
                   <input
@@ -405,7 +405,7 @@ export default function AbsenceFormModal({
                   px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors
                   ${isSubmitting 
                     ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-ena-blue-600 hover:bg-ena-blue-700'
+                    : 'bg-cnu-blue-600 hover:bg-cnu-blue-700'
                   }
                 `}
               >

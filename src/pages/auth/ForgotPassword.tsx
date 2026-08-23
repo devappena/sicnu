@@ -5,7 +5,8 @@ import {
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 import { useToast } from '../../hooks/useToast';
-import enaLogo from '../../assets/images/ena-logo.png';
+import cnuLogo from '../../assets/images/cnu-logo.svg';
+import { identity } from '../../config/identity';
 
 const ForgotPassword: React.FC = () => {
   const { showToast } = useToast();
@@ -44,7 +45,7 @@ const ForgotPassword: React.FC = () => {
 
   if (emailSent) {
     return (
-      <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-ena-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8">
+      <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-cnu-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
             <div className="mx-auto h-16 w-16 bg-white rounded-full flex items-center justify-center mb-4">
@@ -97,7 +98,7 @@ const ForgotPassword: React.FC = () => {
             <div className="mt-6">
               <Link 
                 to="/auth/login"
-                className="w-full bg-gradient-to-r from-ena-blue to-ena-blue-700 hover:from-ena-blue-700 hover:to-ena-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center"
+                className="w-full bg-gradient-to-r from-cnu-blue to-cnu-blue-700 hover:from-cnu-blue-700 hover:to-cnu-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
@@ -112,14 +113,14 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-ena-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8">
+    <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-cnu-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         {/* Logo et titre */}
         <div className="text-center">
           <div className="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center mb-4 p-2">
             <img 
-              src={enaLogo} 
-              alt="Logo ENA" 
+              src={cnuLogo} 
+              alt={`Logo ${identity.orgShort}`} 
               className="h-full w-full object-contain"
             />
           </div>
@@ -161,7 +162,7 @@ const ForgotPassword: React.FC = () => {
                   }
                 }}
                 className={`input-field ${errors.email ? 'border-red-500' : ''}`}
-                placeholder="votre.email@ena.cd"
+                placeholder="votre.email@comnat-unesco.cd"
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -179,7 +180,7 @@ const ForgotPassword: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-ena-blue to-ena-blue-700 hover:from-ena-blue-700 hover:to-ena-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
+              className="w-full bg-gradient-to-r from-cnu-blue to-cnu-blue-700 hover:from-cnu-blue-700 hover:to-cnu-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
             >
               {isLoading ? (
                 <div className="flex items-center">
@@ -204,7 +205,7 @@ const ForgotPassword: React.FC = () => {
           <div className="mt-6 text-center">
             <Link 
               to="/auth/login" 
-              className="inline-flex items-center text-sm font-medium text-ena-blue hover:text-ena-blue-700"
+              className="inline-flex items-center text-sm font-medium text-cnu-blue hover:text-cnu-blue-700"
             >
               <ArrowLeftIcon className="h-4 w-4 mr-1" />
               Retour à la connexion

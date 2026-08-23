@@ -138,7 +138,7 @@ const Documents: React.FC = () => {
               'Confidentiel': doc.isConfidential ? 'Oui' : 'Non'
             }))}
             filename="documents_ena"
-            title="Liste des Documents - ENA"
+            title="Liste des Documents - CNU-RDC"
           />
           <button 
             onClick={() => setShowUploadZone(!showUploadZone)}
@@ -267,7 +267,7 @@ const Documents: React.FC = () => {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-ena-blue-500 focus:border-ena-blue-500"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
                     placeholder="Rechercher un document ou employé..."
                   />
                 </div>
@@ -275,7 +275,7 @@ const Documents: React.FC = () => {
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-ena-blue-500 focus:border-ena-blue-500"
+                className="px-4 py-2 border border-gray-300 rounded-md focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
               >
                 {documentTypes.map(type => (
                   <option key={type.value} value={type.value}>

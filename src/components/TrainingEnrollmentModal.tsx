@@ -142,8 +142,8 @@ export default function TrainingEnrollmentModal({
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-ena-blue-100 rounded-lg">
-                <AcademicCapIcon className="w-6 h-6 text-ena-blue-600" />
+              <div className="p-2 bg-cnu-blue-100 rounded-lg">
+                <AcademicCapIcon className="w-6 h-6 text-cnu-blue-600" />
               </div>
               <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 Détails de la formation
@@ -226,7 +226,7 @@ export default function TrainingEnrollmentModal({
                   <p className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-gray-700'}`}>
                     <span className="font-medium">Fin:</span> {format(new Date(training.endDate), 'dd MMMM yyyy à HH:mm', { locale: fr })}
                   </p>
-                  <p className={`text-sm font-medium ${isDarkMode ? 'text-ena-blue-400' : 'text-ena-blue-600'}`}>
+                  <p className={`text-sm font-medium ${isDarkMode ? 'text-cnu-blue-400' : 'text-cnu-blue-600'}`}>
                     Durée: {calculateDuration()}
                   </p>
                 </div>
@@ -251,7 +251,7 @@ export default function TrainingEnrollmentModal({
                       <div className={`w-full bg-gray-200 rounded-full h-2 mt-1 ${isDarkMode ? 'bg-slate-600' : ''}`}>
                         <div 
                           className={`h-2 rounded-full transition-all ${
-                            isFull() ? 'bg-red-500' : 'bg-ena-blue-500'
+                            isFull() ? 'bg-red-500' : 'bg-cnu-blue-500'
                           }`}
                           style={{ width: `${(training.enrolledEmployees.length / training.capacity) * 100}%` }}
                         />
@@ -360,7 +360,7 @@ export default function TrainingEnrollmentModal({
                   rows={3}
                   placeholder="Ajoutez des commentaires ou questions concernant cette formation..."
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-600 border-slate-500 text-white placeholder-slate-400' 
                       : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -395,7 +395,7 @@ export default function TrainingEnrollmentModal({
                   px-6 py-2 text-sm font-medium text-white rounded-lg transition-colors
                   ${isSubmitting 
                     ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-ena-blue-600 hover:bg-ena-blue-700'
+                    : 'bg-cnu-blue-600 hover:bg-cnu-blue-700'
                   }
                 `}
               >

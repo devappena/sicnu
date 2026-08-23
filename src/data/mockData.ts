@@ -12,7 +12,6 @@ import type {
   Skill,
   EmployeeSkill,
   TrainingProgram,
-  TimeSheet,
   Holiday,
   Notification,
   DashboardStats,
@@ -23,11 +22,6 @@ import type {
   PayrollItem,
   ExpenseReport,
   Budget,
-  AttendanceRecord,
-  WorkSchedule,
-  OvertimeEntry,
-  TimeOffPolicy,
-  // ShiftPattern, // Commenté car non utilisé actuellement
   KPI,
   ReportTemplate
 } from '../types';
@@ -35,19 +29,19 @@ import type {
 export const mockEmployees: Employee[] = [
   {
     id: '1',
-    firstName: 'Bafuafua Mande',
-    lastName: 'Victor',
-    email: 'bafuafua.victor@ena.cd',
+    firstName: 'Aline',
+    lastName: 'Kalala',
+    email: 'aline.kalala@comnat-unesco.cd',
     phone: '+243 999 123 456',
-    position: 'Directeur Administratif',
-    department: 'Administration',
+    position: 'Secrétaire générale',
+    department: 'Secrétariat général',
     salary: 1500000,
     hireDate: new Date('2020-01-15'),
     status: 'active',
-    address: 'Avenue Kasa-Vubu, Kinshasa',
+    address: 'Gombe, Kinshasa',
     dateOfBirth: new Date('1985-03-20'),
     emergencyContact: {
-      name: 'Marie Victor',
+      name: 'Paul Kalala',
       phone: '+243 999 123 457',
       relationship: 'Épouse'
     }
@@ -56,7 +50,7 @@ export const mockEmployees: Employee[] = [
     id: '2',
     firstName: 'Joel',
     lastName: 'Nyengele',
-    email: 'joel.nyengele@ena.cd',
+    email: 'joel.nyengele@comnat-unesco.cd',
     phone: '+243 999 234 567',
     position: 'Responsable RH',
     department: 'Ressources Humaines',
@@ -75,7 +69,7 @@ export const mockEmployees: Employee[] = [
     id: '3',
     firstName: 'Marie Clemence',
     lastName: 'Kangite',
-    email: 'marie.kangite@ena.cd',
+    email: 'marie.kangite@comnat-unesco.cd',
     phone: '+243 999 345 678',
     position: 'Professeure de Droit',
     department: 'Académique',
@@ -94,7 +88,7 @@ export const mockEmployees: Employee[] = [
     id: '4',
     firstName: 'Israel Mutombo',
     lastName: 'Nyembue',
-    email: 'israel.nyembue@ena.cd',
+    email: 'israel.nyembue@comnat-unesco.cd',
     phone: '+243 999 456 789',
     position: 'Secrétaire Exécutif',
     department: 'Administration',
@@ -113,7 +107,7 @@ export const mockEmployees: Employee[] = [
     id: '5',
     firstName: 'Claude',
     lastName: 'Mujinga',
-    email: 'claude.mujinga@ena.cd',
+    email: 'claude.mujinga@comnat-unesco.cd',
     phone: '+243 999 567 890',
     position: 'Agent de Sécurité',
     department: 'Sécurité',
@@ -135,7 +129,7 @@ export const mockDepartments: Department[] = [
     id: '1',
     name: 'Administration',
     description: 'Gestion administrative et financière',
-    headOfDepartment: 'Bafuafua Mande Victor',
+    headOfDepartment: 'Aline Kalala',
     employeeCount: 8
   },
   {
@@ -373,7 +367,7 @@ export const mockDocuments: Document[] = [
     id: '1',
     employeeId: '1',
     type: 'contract',
-    name: 'Contrat_Bafuafua_Victor.pdf',
+    name: 'Contrat_Aline_Kalala.pdf',
     url: '/documents/contracts/contract_1.pdf',
     uploadDate: new Date('2020-01-15'),
     size: 2048000,
@@ -383,7 +377,7 @@ export const mockDocuments: Document[] = [
     id: '2',
     employeeId: '1',
     type: 'cv',
-    name: 'CV_Bafuafua_Victor.pdf',
+    name: 'CV_Aline_Kalala.pdf',
     url: '/documents/cvs/cv_1.pdf',
     uploadDate: new Date('2020-01-10'),
     size: 1024000,
@@ -394,17 +388,38 @@ export const mockDocuments: Document[] = [
 export const mockLeaveBalances: LeaveBalance[] = [
   {
     employeeId: '1',
-    year: 2025,
+    year: 2026,
     annualLeave: { total: 30, used: 12, remaining: 18 },
     sickLeave: { total: 15, used: 3, remaining: 12 },
     personalLeave: { total: 5, used: 1, remaining: 4 }
   },
   {
     employeeId: '2',
-    year: 2025,
+    year: 2026,
     annualLeave: { total: 30, used: 8, remaining: 22 },
     sickLeave: { total: 15, used: 0, remaining: 15 },
     personalLeave: { total: 5, used: 2, remaining: 3 }
+  },
+  {
+    employeeId: '3',
+    year: 2026,
+    annualLeave: { total: 30, used: 5, remaining: 25 },
+    sickLeave: { total: 15, used: 1, remaining: 14 },
+    personalLeave: { total: 5, used: 0, remaining: 5 }
+  },
+  {
+    employeeId: '4',
+    year: 2026,
+    annualLeave: { total: 24, used: 10, remaining: 14 },
+    sickLeave: { total: 15, used: 2, remaining: 13 },
+    personalLeave: { total: 5, used: 1, remaining: 4 }
+  },
+  {
+    employeeId: '5',
+    year: 2026,
+    annualLeave: { total: 24, used: 4, remaining: 20 },
+    sickLeave: { total: 15, used: 5, remaining: 10 },
+    personalLeave: { total: 5, used: 0, remaining: 5 }
   }
 ];
 
@@ -457,7 +472,7 @@ export const mockTrainingPrograms: TrainingProgram[] = [
     description: 'Formation complète en leadership et gestion d\'équipe',
     duration: 40,
     cost: 500000,
-    provider: 'ENA Formation',
+    provider: 'CNU Formation',
     category: 'Management',
     prerequisites: ['Expérience managériale', 'Formation de base'],
     skills: ['1', '3'],
@@ -474,30 +489,6 @@ export const mockTrainingPrograms: TrainingProgram[] = [
     prerequisites: ['Connaissance comptable'],
     skills: ['2'],
     certification: true
-  }
-];
-
-export const mockTimeSheets: TimeSheet[] = [
-  {
-    id: '1',
-    employeeId: '1',
-    date: new Date('2025-06-24'),
-    clockIn: new Date('2025-06-24T08:00:00'),
-    clockOut: new Date('2025-06-24T17:00:00'),
-    breakDuration: 60,
-    totalHours: 8,
-    status: 'approved',
-    notes: 'Journée normale'
-  },
-  {
-    id: '2',
-    employeeId: '2',
-    date: new Date('2025-06-24'),
-    clockIn: new Date('2025-06-24T08:30:00'),
-    clockOut: new Date('2025-06-24T17:30:00'),
-    breakDuration: 60,
-    totalHours: 8,
-    status: 'pending'
   }
 ];
 
@@ -518,7 +509,7 @@ export const mockHolidays: Holiday[] = [
   },
   {
     id: '3',
-    name: 'Journée ENA',
+    name: 'Journée CNU-RDC',
     date: new Date('2025-09-15'),
     type: 'company',
     isRecurring: true
@@ -655,7 +646,7 @@ export const mockApprovalWorkflows: ApprovalWorkflow[] = [
         stepIndex: 1,
         approverId: '1',
         approverRole: 'hr',
-        approverName: 'Bafuafua Victor',
+        approverName: 'Aline Kalala',
         status: 'pending',
         isRequired: true,
         canDelegate: false
@@ -819,120 +810,6 @@ export const mockBudgets: Budget[] = [
   }
 ];
 
-// Gestion du temps avancée
-export const mockAttendanceRecords: AttendanceRecord[] = [
-  {
-    id: '1',
-    employeeId: '1',
-    date: new Date('2025-07-03'),
-    clockIn: new Date('2025-07-03T07:45:00'),
-    clockOut: new Date('2025-07-03T17:30:00'),
-    breaks: [
-      {
-        id: '1',
-        startTime: new Date('2025-07-03T12:00:00'),
-        endTime: new Date('2025-07-03T13:00:00'),
-        duration: 60,
-        type: 'lunch',
-        isPaid: false
-      }
-    ],
-    totalWorkedHours: 8.75,
-    scheduledHours: 8,
-    overtimeHours: 0.75,
-    status: 'present',
-    location: 'Bureau Principal',
-    device: 'Terminal-001'
-  },
-  {
-    id: '2',
-    employeeId: '2',
-    date: new Date('2025-07-03'),
-    clockIn: new Date('2025-07-03T08:10:00'),
-    clockOut: new Date('2025-07-03T17:00:00'),
-    breaks: [
-      {
-        id: '2',
-        startTime: new Date('2025-07-03T12:30:00'),
-        endTime: new Date('2025-07-03T13:30:00'),
-        duration: 60,
-        type: 'lunch',
-        isPaid: false
-      }
-    ],
-    totalWorkedHours: 7.83,
-    scheduledHours: 8,
-    overtimeHours: 0,
-    status: 'late',
-    location: 'Bureau Principal',
-    device: 'Terminal-002'
-  }
-];
-
-export const mockWorkSchedules: WorkSchedule[] = [
-  {
-    id: '1',
-    employeeId: '1',
-    name: 'Horaire Standard Direction',
-    effectiveDate: new Date('2025-01-01'),
-    workDays: [
-      { dayOfWeek: 1, isWorkDay: true, startTime: '08:00', endTime: '17:00', breakDuration: 60 },
-      { dayOfWeek: 2, isWorkDay: true, startTime: '08:00', endTime: '17:00', breakDuration: 60 },
-      { dayOfWeek: 3, isWorkDay: true, startTime: '08:00', endTime: '17:00', breakDuration: 60 },
-      { dayOfWeek: 4, isWorkDay: true, startTime: '08:00', endTime: '17:00', breakDuration: 60 },
-      { dayOfWeek: 5, isWorkDay: true, startTime: '08:00', endTime: '17:00', breakDuration: 60 },
-      { dayOfWeek: 6, isWorkDay: false },
-      { dayOfWeek: 0, isWorkDay: false }
-    ],
-    totalWeeklyHours: 40,
-    isFlexible: false,
-    overtimeRules: [
-      {
-        id: '1',
-        name: 'Heures supplémentaires quotidiennes',
-        type: 'daily',
-        threshold: 8,
-        multiplier: 1.5,
-        requiresApproval: true
-      }
-    ]
-  }
-];
-
-export const mockOvertimeEntries: OvertimeEntry[] = [
-  {
-    id: '1',
-    employeeId: '1',
-    date: new Date('2025-07-03'),
-    hours: 0.75,
-    multiplier: 1.5,
-    reason: 'Préparation rapport budget urgent',
-    status: 'approved',
-    approvedBy: '2'
-  }
-];
-
-export const mockTimeOffPolicies: TimeOffPolicy[] = [
-  {
-    id: '1',
-    name: 'Congés Annuels Standard',
-    type: 'annual',
-    accrualRate: 2.5, // 2.5 jours par mois
-    maxAccrual: 30,
-    maxCarryOver: 5,
-    requiresApproval: true,
-    advanceNoticeRequired: 7,
-    blockoutPeriods: [
-      {
-        startDate: new Date('2025-12-15'),
-        endDate: new Date('2025-12-31'),
-        description: 'Période de fermeture administrative'
-      }
-    ],
-    eligibilityRules: ['6 mois minimum d\'ancienneté']
-  }
-];
-
 export const mockKPIs: KPI[] = [
   {
     id: 'attendance-rate',
@@ -985,7 +862,7 @@ export const mockReportTemplates: ReportTemplate[] = [
       time: '09:00',
       isActive: true
     },
-    recipients: ['bafuafua.victor@ena.cd', 'joel.nyengele@ena.cd'],
+    recipients: ['aline.kalala@comnat-unesco.cd', 'joel.nyengele@comnat-unesco.cd'],
     format: 'pdf',
     isActive: true
   }

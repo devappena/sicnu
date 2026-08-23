@@ -1,5 +1,6 @@
 import React from 'react';
-import enaLogoImage from '../assets/images/ena-logo.png';
+import cnuLogoImage from '../assets/images/cnu-logo.svg';
+import { identity } from '../config/identity';
 
 interface LogoProps {
   className?: string;
@@ -30,18 +31,18 @@ const Logo: React.FC<LogoProps> = ({
     <div className={`flex items-center space-x-3 ${className}`}>
       <div className={`${sizeClasses[size]} flex-shrink-0 bg-white bg-opacity-20 rounded-lg p-1`}>
         <img 
-          src={enaLogoImage} 
-          alt="Logo ENA - École Nationale d'Administration" 
+          src={cnuLogoImage} 
+          alt={`Logo ${identity.orgShort} — ${identity.orgName}`} 
           className="h-full w-full object-contain drop-shadow-md hover:drop-shadow-lg transition-all duration-200"
         />
       </div>
       {showText && (
         <div className="flex flex-col">
           <h1 className={`font-bold text-white ${textSizeClasses[size]} leading-tight`}>
-            ENA RH
+            {identity.appName}
           </h1>
           <p className={`text-blue-200 text-xs ${size === 'sm' ? 'hidden' : ''} leading-tight`}>
-            Portail RH
+            {identity.orgShort}
           </p>
         </div>
       )}

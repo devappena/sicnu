@@ -5,7 +5,8 @@ import {
   EyeSlashIcon
 } from '@heroicons/react/24/outline';
 import { useToast } from '../../hooks/useToast';
-import enaLogo from '../../assets/images/ena-logo.png';
+import cnuLogo from '../../assets/images/cnu-logo.svg';
+import { identity } from '../../config/identity';
 
 const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -110,14 +111,14 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-ena-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8 py-4">
+    <div className="h-screen overflow-hidden flex items-center justify-center bg-gradient-to-br from-cnu-blue via-blue-800 to-indigo-900 px-4 sm:px-6 lg:px-8 py-4">
       <div className="max-w-2xl w-full space-y-8">
         {/* Logo et titre */}
         <div className="text-center">
           <div className="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center mb-4 p-2">
             <img 
-              src={enaLogo} 
-              alt="Logo ENA" 
+              src={cnuLogo} 
+              alt={`Logo ${identity.orgShort}`} 
               className="h-full w-full object-contain"
             />
           </div>
@@ -125,7 +126,7 @@ const Register: React.FC = () => {
             Créer un compte
           </h2>
           <p className="mt-2 text-blue-100">
-            Rejoignez le portail RH de l'ENA
+            Rejoignez {identity.appName} — {identity.orgShort}
           </p>
         </div>
 
@@ -184,7 +185,7 @@ const Register: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`input-field ${errors.email ? 'border-red-500' : ''}`}
-                  placeholder="votre.email@ena.cd"
+                  placeholder="votre.email@comnat-unesco.cd"
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -342,7 +343,7 @@ const Register: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-ena-blue to-ena-blue-700 hover:from-ena-blue-700 hover:to-ena-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
+              className="w-full bg-gradient-to-r from-cnu-blue to-cnu-blue-700 hover:from-cnu-blue-700 hover:to-cnu-blue-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-lg"
             >
               {isLoading ? (
                 <div className="flex items-center">
@@ -367,7 +368,7 @@ const Register: React.FC = () => {
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Déjà un compte ?{' '}
-              <Link to="/auth/login" className="font-medium text-ena-blue hover:text-ena-blue-700">
+              <Link to="/auth/login" className="font-medium text-cnu-blue hover:text-cnu-blue-700">
                 Se connecter
               </Link>
             </p>

@@ -8,7 +8,7 @@ interface LoadingSpinnerProps {
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
   size = 'md', 
-  color = 'text-ena-blue-600',
+  color = 'text-cnu-blue-600',
   className = ''
 }) => {
   const sizeClasses = {

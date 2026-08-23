@@ -135,7 +135,7 @@ export default function Pagination({
                   onClick={() => handlePageChange(page as number)}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     currentPage === page
-                      ? 'bg-ena-blue-600 text-white'
+                      ? 'bg-cnu-blue-600 text-white'
                       : 'text-gray-700 hover:bg-gray-100 border border-gray-300'
                   }`}
                 >
@@ -174,7 +174,7 @@ export default function Pagination({
           <select
             value={itemsPerPage}
             onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
-            className="border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500"
+            className="border border-gray-300 rounded-lg px-2 py-1 text-sm focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500"
           >
             {itemsPerPageOptions.map(option => (
               <option key={option} value={option}>

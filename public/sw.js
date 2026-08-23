@@ -1,6 +1,6 @@
-const CACHE_NAME = 'ena-rh-v1.0.0';
-const STATIC_CACHE_NAME = 'ena-rh-static-v1.0.0';
-const DYNAMIC_CACHE_NAME = 'ena-rh-dynamic-v1.0.0';
+const CACHE_NAME = 'sicnu-v1.0.0';
+const STATIC_CACHE_NAME = 'sicnu-static-v1.0.0';
+const DYNAMIC_CACHE_NAME = 'sicnu-dynamic-v1.0.0';
 
 // Ressources à mettre en cache immédiatement
 const STATIC_ASSETS = [
@@ -270,7 +270,7 @@ self.addEventListener('push', (event) => {
     body: 'Vous avez de nouvelles notifications RH',
     icon: '/pwa-icons/icon-192x192.png',
     badge: '/pwa-icons/badge-72x72.png',
-    tag: 'ena-rh-notification',
+    tag: 'sicnu-notification',
     data: {
       url: '/notifications'
     },
@@ -301,7 +301,7 @@ self.addEventListener('push', (event) => {
   }
 
   event.waitUntil(
-    self.registration.showNotification('ENA Portail RH', options)
+    self.registration.showNotification('SICNU', options)
   );
 });
 
@@ -372,4 +372,4 @@ async function cacheUrls(urls) {
   );
 }
 
-console.log('🚀 Service Worker ENA RH chargé et prêt!');
+console.log('Service Worker SICNU prêt');

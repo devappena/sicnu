@@ -44,8 +44,9 @@ export const usePWA = (): PWAHook => {
       setIsInstalled(true);
     }
 
-    // Enregistrement du Service Worker
-    registerServiceWorker();
+    if (!import.meta.env.DEV) {
+      registerServiceWorker();
+    }
 
     // Écoute des événements
     setupEventListeners();
@@ -61,8 +62,9 @@ export const usePWA = (): PWAHook => {
   const registerServiceWorker = async () => {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/',
+        const base = import.meta.env.BASE_URL;
+        const registration = await navigator.serviceWorker.register(`${base}sw.js`, {
+          scope: base,
           updateViaCache: 'none'
         });
 

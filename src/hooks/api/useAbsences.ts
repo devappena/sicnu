@@ -7,6 +7,7 @@ import { absenceService } from '@/api';
 import type { AbsenceFormData, PaginationParams } from '@/api';
 import { config } from '@/config/devConfig';
 import { mockAbsences } from '@/data/mockData';
+import { unwrapList } from './unwrapList';
 
 // Clés de requête pour le cache
 export const absenceKeys = {
@@ -52,6 +53,7 @@ export function useAbsences(params?: PaginationParams & {
       }
       return absenceService.getAll(params);
     },
+    select: unwrapList,
     staleTime: 2 * 60 * 1000, // 2 minutes
   });
 }

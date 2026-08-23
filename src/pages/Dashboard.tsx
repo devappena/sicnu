@@ -220,7 +220,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <PageHeader 
         title={`Bonjour ${user?.firstName || 'Employé'}`}
-        description="Bienvenue sur votre portail RH - École Nationale d'Administration"
+        description="Bienvenue sur SICNU — Commission nationale UNESCO-RDC"
         icon={ChartBarIcon}
       />
 
@@ -339,7 +339,7 @@ export default function Dashboard() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium text-gray-900">Événements à Venir</h3>
-            <a href="/trainings" className="text-sm text-ena-blue-600 hover:text-ena-blue-800 font-medium">
+            <a href="/trainings" className="text-sm text-cnu-blue-600 hover:text-cnu-blue-800 font-medium">
               Voir planning
             </a>
           </div>
@@ -368,7 +368,7 @@ export default function Dashboard() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium text-gray-900">Types d'Absences</h3>
-            <a href="/absences" className="text-sm text-ena-blue-600 hover:text-ena-blue-800 font-medium">
+            <a href="/absences" className="text-sm text-cnu-blue-600 hover:text-cnu-blue-800 font-medium">
               Gérer absences
             </a>
           </div>

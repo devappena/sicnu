@@ -119,8 +119,8 @@ export default function AbsenceApprovalModal({
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-ena-blue-100 rounded-lg">
-                <CheckCircleIcon className="w-6 h-6 text-ena-blue-600" />
+              <div className="p-2 bg-cnu-blue-100 rounded-lg">
+                <CheckCircleIcon className="w-6 h-6 text-cnu-blue-600" />
               </div>
               <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 Traiter la demande d'absence
@@ -144,8 +144,8 @@ export default function AbsenceApprovalModal({
             border
           `}>
             <div className="flex items-center space-x-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-ena-blue-100 flex items-center justify-center">
-                <span className="text-ena-blue-600 font-medium">
+              <div className="w-12 h-12 rounded-full bg-cnu-blue-100 flex items-center justify-center">
+                <span className="text-cnu-blue-600 font-medium">
                   {employee.firstName[0]}{employee.lastName[0]}
                 </span>
               </div>
@@ -242,7 +242,7 @@ export default function AbsenceApprovalModal({
                       ${isDarkMode ? 'bg-slate-600' : 'bg-gray-50'}
                     `}
                   >
-                    <DocumentTextIcon className="w-4 h-4 text-ena-blue-600" />
+                    <DocumentTextIcon className="w-4 h-4 text-cnu-blue-600" />
                     <span className={`text-sm ${isDarkMode ? 'text-slate-300' : 'text-gray-700'}`}>
                       {doc}
                     </span>
@@ -319,7 +319,7 @@ export default function AbsenceApprovalModal({
                       : "Expliquez pourquoi cette demande est rejetée..."
                   }
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' 
                       : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'

@@ -52,7 +52,7 @@ function TrainingStats({ trainings }: { trainings: Training[] }) {
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
-      <div className={`bg-ena-blue text-white p-4 rounded-lg text-center ${isDarkMode ? 'shadow-lg' : 'shadow'}`}>
+      <div className={`bg-cnu-blue text-white p-4 rounded-lg text-center ${isDarkMode ? 'shadow-lg' : 'shadow'}`}>
         <AcademicCapIcon className="h-6 w-6 mx-auto mb-2" />
         <div className="text-lg font-bold">{stats.total}</div>
         <div className="text-xs opacity-90">Total</div>
@@ -114,7 +114,7 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
       case 'completed':
         return 'bg-green-100 text-green-800 border-green-200 dark:bg-green-900/20 dark:text-green-300';
       case 'in-progress':
-        return 'bg-ena-blue/10 text-ena-blue border-ena-blue/20 dark:bg-ena-blue/20 dark:text-ena-blue';
+        return 'bg-cnu-blue/10 text-cnu-blue border-cnu-blue/20 dark:bg-cnu-blue/20 dark:text-cnu-blue';
       case 'scheduled':
         return 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/20 dark:text-yellow-300';
       case 'cancelled':
@@ -156,8 +156,8 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
       `}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4 flex-1">
-            <div className="w-12 h-12 rounded-lg bg-ena-blue-100 flex items-center justify-center flex-shrink-0">
-              <AcademicCapIcon className="h-6 w-6 text-ena-blue-600" />
+            <div className="w-12 h-12 rounded-lg bg-cnu-blue-100 flex items-center justify-center flex-shrink-0">
+              <AcademicCapIcon className="h-6 w-6 text-cnu-blue-600" />
             </div>
             
             <div className="flex-1 min-w-0">
@@ -200,7 +200,7 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
           <div className="flex items-center space-x-2 flex-shrink-0 ml-4">
             <button 
               onClick={() => onViewDetails(training)}
-              className="p-2 bg-ena-blue-50 text-ena-blue-700 rounded-lg hover:bg-ena-blue-100 transition-colors"
+              className="p-2 bg-cnu-blue-50 text-cnu-blue-700 rounded-lg hover:bg-cnu-blue-100 transition-colors"
               title="Voir détails"
             >
               <EyeIcon className="h-4 w-4" />
@@ -229,8 +229,8 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
       {/* En-tête */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-lg bg-ena-blue-100 flex items-center justify-center">
-            <AcademicCapIcon className="h-6 w-6 text-ena-blue-600" />
+          <div className="w-12 h-12 rounded-lg bg-cnu-blue-100 flex items-center justify-center">
+            <AcademicCapIcon className="h-6 w-6 text-cnu-blue-600" />
           </div>
           <div>
             <h3 className={`font-semibold text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -278,7 +278,7 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
             Occupation
           </span>
           <span className={`text-xs font-medium ${
-            isFull ? 'text-red-600' : 'text-ena-blue-600'
+            isFull ? 'text-red-600' : 'text-cnu-blue-600'
           }`}>
             {occupancyRate}%
           </span>
@@ -286,7 +286,7 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
         <div className={`w-full bg-gray-200 rounded-full h-2 ${isDarkMode ? 'bg-slate-600' : ''}`}>
           <div 
             className={`h-2 rounded-full transition-all ${
-              isFull ? 'bg-red-500' : 'bg-ena-blue-500'
+              isFull ? 'bg-red-500' : 'bg-cnu-blue-500'
             }`}
             style={{ width: `${occupancyRate}%` }}
           />
@@ -312,7 +312,7 @@ function TrainingCard({ training, onViewDetails, onEdit, currentUserId, viewMode
       <div className="flex space-x-2">
         <button 
           onClick={() => onViewDetails(training)}
-          className="flex-1 bg-ena-blue-50 text-ena-blue-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-ena-blue-100 transition-colors flex items-center justify-center"
+          className="flex-1 bg-cnu-blue-50 text-cnu-blue-700 px-3 py-2 rounded-lg text-sm font-medium hover:bg-cnu-blue-100 transition-colors flex items-center justify-center"
         >
           <EyeIcon className="h-4 w-4 mr-1" />
           Voir détails
@@ -489,7 +489,7 @@ export default function TrainingsNew() {
           {canCreateTrainings && (
             <button
               onClick={handleNewTraining}
-              className="bg-ena-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-ena-blue-700 transition-colors flex items-center"
+              className="bg-cnu-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-cnu-blue-700 transition-colors flex items-center"
             >
               <PlusIcon className="h-5 w-5 mr-2" />
               Nouvelle Formation
@@ -511,7 +511,7 @@ export default function TrainingsNew() {
               placeholder="Rechercher une formation, formateur..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500 dark:bg-slate-700 dark:border-slate-600 dark:text-white"
             />
           </div>
 
@@ -531,14 +531,14 @@ export default function TrainingsNew() {
                   onClick={() => setSelectedStatus(filter.key as typeof selectedStatus)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2 ${
                     selectedStatus === filter.key
-                      ? 'bg-ena-blue-600 text-white'
+                      ? 'bg-cnu-blue-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600'
                   }`}
                 >
                   <span>{filter.label}</span>
                   <span className={`px-1.5 py-0.5 rounded-full text-xs ${
                     selectedStatus === filter.key
-                      ? 'bg-ena-blue-500 text-white'
+                      ? 'bg-cnu-blue-500 text-white'
                       : 'bg-gray-200 text-gray-600 dark:bg-slate-600 dark:text-slate-300'
                   }`}>
                     {filter.count}
@@ -606,7 +606,7 @@ export default function TrainingsNew() {
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="mt-3 text-ena-blue-600 hover:text-ena-blue-500 text-sm font-medium"
+                className="mt-3 text-cnu-blue-600 hover:text-cnu-blue-500 text-sm font-medium"
               >
                 Effacer la recherche
               </button>

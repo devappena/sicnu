@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Styles personnalisés pour ENA Portail RH */
+/* Styles personnalisés SICNU / CNU-RDC */
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -108,19 +108,19 @@ body {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-/* Styles pour le logo ENA */
-.ena-logo {
+/* Styles pour le logo CNU */
+.cnu-logo {
   background: linear-gradient(135deg, #1c3d8f 0%, #f59e0b 100%);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.ena-logo:hover {
+.cnu-logo:hover {
   transform: translateY(-1px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.ena-logo-text {
+.cnu-logo-text {
   background: linear-gradient(135deg, #1c3d8f 0%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -137,7 +137,7 @@ body {
   }
 }
 
-.ena-logo-animated {
+.cnu-logo-animated {
   animation: logoFloat 3s ease-in-out infinite;
 }
 
@@ -174,23 +174,23 @@ body {
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Classes ENA pour Tailwind */
-.bg-ena-blue-50 { background-color: #eff6ff; }
-.bg-ena-blue-100 { background-color: #dbeafe; }
-.bg-ena-blue-500 { background-color: #1c3d8f; }
-.bg-ena-blue-600 { background-color: #1c3d8f; }
-.bg-ena-blue-700 { background-color: #1a3580; }
+/* Classes CNU pour Tailwind */
+.bg-cnu-blue-50 { background-color: #eff6ff; }
+.bg-cnu-blue-100 { background-color: #dbeafe; }
+.bg-cnu-blue-500 { background-color: #1c3d8f; }
+.bg-cnu-blue-600 { background-color: #1c3d8f; }
+.bg-cnu-blue-700 { background-color: #1a3580; }
 
-.text-ena-blue-500 { color: #1c3d8f; }
-.text-ena-blue-600 { color: #1c3d8f; }
-.text-ena-blue-700 { color: #1a3580; }
+.text-cnu-blue-500 { color: #1c3d8f; }
+.text-cnu-blue-600 { color: #1c3d8f; }
+.text-cnu-blue-700 { color: #1a3580; }
 
-.border-ena-blue-500 { border-color: #1c3d8f; }
-.border-ena-blue-600 { border-color: #1c3d8f; }
-.border-ena-blue-700 { border-color: #1a3580; }
+.border-cnu-blue-500 { border-color: #1c3d8f; }
+.border-cnu-blue-600 { border-color: #1c3d8f; }
+.border-cnu-blue-700 { border-color: #1a3580; }
 
-.hover\:bg-ena-blue-50:hover { background-color: #eff6ff; }
-.hover\:bg-ena-blue-100:hover { background-color: #dbeafe; }
-.hover\:bg-ena-blue-700:hover { background-color: #1a3580; }
+.hover\:bg-cnu-blue-50:hover { background-color: #eff6ff; }
+.hover\:bg-cnu-blue-100:hover { background-color: #dbeafe; }
+.hover\:bg-cnu-blue-700:hover { background-color: #1a3580; }
 
-.hover\:text-ena-blue-600:hover { color: #1c3d8f; }
+.hover\:text-cnu-blue-600:hover { color: #1c3d8f; }

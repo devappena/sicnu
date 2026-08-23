@@ -103,7 +103,7 @@ const EmployeeDetailModal: React.FC<EmployeeDetailModalProps> = ({
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-ena-blue-500 to-ena-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-cnu-blue-500 to-cnu-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
                 {employee.firstName.charAt(0)}{employee.lastName.charAt(0)}
               </div>
               <div>

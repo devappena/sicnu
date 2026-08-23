@@ -16,6 +16,17 @@ import {
   AreaChart,
   Area
 } from 'recharts';
+import { useTheme } from '../hooks/useTheme';
+
+function ChartTitle({ title }: { title?: string }) {
+  const { isDarkMode } = useTheme();
+  if (!title) return null;
+  return (
+    <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+      {title}
+    </h3>
+  );
+}
 
 // Types pour les données de graphiques
 interface ChartData {
@@ -56,9 +67,7 @@ export const CustomBarChart: React.FC<BarChartProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {title && (
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-      )}
+      <ChartTitle title={title} />
       <ResponsiveContainer width="100%" height={height}>
         <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -97,9 +106,7 @@ export const CustomPieChart: React.FC<PieChartProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {title && (
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-      )}
+      <ChartTitle title={title} />
       <ResponsiveContainer width="100%" height={height}>
         <PieChart>
           <Pie
@@ -151,9 +158,7 @@ export const CustomLineChart: React.FC<LineChartProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {title && (
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-      )}
+      <ChartTitle title={title} />
       <ResponsiveContainer width="100%" height={height}>
         <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -201,9 +206,7 @@ export const CustomAreaChart: React.FC<AreaChartProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {title && (
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-      )}
+      <ChartTitle title={title} />
       <ResponsiveContainer width="100%" height={height}>
         <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -252,9 +255,7 @@ export const CustomMultiLineChart: React.FC<MultiLineChartProps> = ({
 }) => {
   return (
     <div className="w-full">
-      {title && (
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-      )}
+      <ChartTitle title={title} />
       <ResponsiveContainer width="100%" height={height}>
         <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

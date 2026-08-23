@@ -5,6 +5,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { authService } from '@/api';
 import type { LoginCredentials, RegisterCredentials } from '@/api';
+import { config } from '@/config/devConfig';
 
 // Clés de requête pour le cache
 export const authKeys = {
@@ -101,7 +102,12 @@ export function useResetPassword() {
  */
 export function useChangePassword() {
   return useMutation({
-    mutationFn: (data: { oldPassword: string; newPassword: string }) =>
-      authService.changePassword(data.oldPassword, data.newPassword),
+    mutationFn: async (data: { oldPassword: string; newPassword: string }) => {
+      if (config.USE_MOCK_DATA) {
+        await new Promise((resolve) => setTimeout(resolve, config.MOCK_DELAY));
+        return;
+      }
+      return authService.changePassword(data.oldPassword, data.newPassword);
+    },
   });
 }

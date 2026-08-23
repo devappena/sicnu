@@ -312,7 +312,7 @@ const EmployeeFormModal: React.FC<EmployeeFormModalProps> = ({
                     value={formData.email}
                     onChange={handleChange}
                     className={`input-field ${errors.email ? 'border-red-500' : ''}`}
-                    placeholder="email@ena.cd"
+                    placeholder="email@comnat-unesco.cd"
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600">{errors.email}</p>

@@ -11,25 +11,20 @@ import {
   UserGroupIcon,
   CalendarIcon
 } from '@heroicons/react/24/outline';
-import { mockPayrolls, mockEmployees, mockPayrollPeriods, mockBudgets } from '../../data/mockData';
+import { mockEmployees, mockPayrollPeriods, mockBudgets } from '../../data/mockData';
 import type { Payroll, PayrollPeriod } from '../../types';
 import BudgetDashboard from '../../components/BudgetDashboard';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { useToast } from '../../hooks/useToast';
+import { calculatePayslip, formatCdf, LEGAL_DISCLAIMER, openPayslipPrint } from '../../legal/rdc';
 
 const PayrollPage: React.FC = () => {
-  const [payrolls] = useState<Payroll[]>(mockPayrolls);
   const [payrollPeriods] = useState<PayrollPeriod[]>(mockPayrollPeriods);
   const [selectedPeriod, setSelectedPeriod] = useState<string>(mockPayrollPeriods[0]?.id || '');
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<'payroll' | 'periods' | 'budgets'>('payroll');
   const { showToast } = useToast();
-
-  const getEmployeeName = (employeeId: string) => {
-    const employee = mockEmployees.find(emp => emp.id === employeeId);
-    return employee ? `${employee.firstName} ${employee.lastName}` : 'Inconnu';
-  };
 
   const getStatusColor = (status: Payroll['status'] | PayrollPeriod['status']) => {
     switch (status) {
@@ -76,16 +71,30 @@ const PayrollPage: React.FC = () => {
     }).format(amount);
   };
 
-  const filteredPayrolls = payrolls.filter(payroll => {
-    const employeeName = getEmployeeName(payroll.employeeId).toLowerCase();
-    return employeeName.includes(searchTerm.toLowerCase());
-  });
-
-  const totalGrossSalary = filteredPayrolls.reduce((sum, p) => sum + p.baseSalary + p.bonuses, 0);
-  const totalNetSalary = filteredPayrolls.reduce((sum, p) => sum + p.netSalary, 0);
-  const totalTaxes = filteredPayrolls.reduce((sum, p) => sum + p.taxes, 0);
-
   const currentPeriod = payrollPeriods.find(p => p.id === selectedPeriod);
+  const periodLabel = currentPeriod
+    ? format(new Date(currentPeriod.startDate), 'MMMM yyyy', { locale: fr })
+    : format(new Date(), 'MMMM yyyy', { locale: fr });
+
+  const legalSlips = mockEmployees.map((employee) =>
+    calculatePayslip({
+      employeeId: employee.id,
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      position: employee.position,
+      department: employee.department,
+      baseSalary: employee.salary,
+      periodLabel,
+    }),
+  );
+
+  const filteredSlips = legalSlips.filter((slip) =>
+    slip.fullName.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const totalGrossSalary = filteredSlips.reduce((sum, slip) => sum + slip.gross, 0);
+  const totalNetSalary = filteredSlips.reduce((sum, slip) => sum + slip.net, 0);
+  const totalTaxes = filteredSlips.reduce((sum, slip) => sum + slip.ipr + slip.inssEmployee, 0);
 
   return (
     <div className="space-y-6">
@@ -103,7 +112,7 @@ const PayrollPage: React.FC = () => {
               Gestion de la Paie
             </h1>
             <p className="text-blue-100">
-              Administration complète des salaires et rémunérations
+              Paie conforme IPR (OL 69/009) et cotisations INSS / INPP / ONEM
             </p>
           </div>
           <div className="flex items-center space-x-4">
@@ -169,7 +178,7 @@ const PayrollPage: React.FC = () => {
                         Employés
                       </dt>
                       <dd className="text-lg font-medium text-gray-900">
-                        {filteredPayrolls.length}
+                        {filteredSlips.length}
                       </dd>
                     </dl>
                   </div>
@@ -189,7 +198,7 @@ const PayrollPage: React.FC = () => {
                         Total Brut
                       </dt>
                       <dd className="text-lg font-medium text-gray-900">
-                        {formatCurrency(totalGrossSalary)}
+                        {formatCdf(totalGrossSalary)}
                       </dd>
                     </dl>
                   </div>
@@ -209,7 +218,7 @@ const PayrollPage: React.FC = () => {
                         Total Net
                       </dt>
                       <dd className="text-lg font-medium text-gray-900">
-                        {formatCurrency(totalNetSalary)}
+                        {formatCdf(totalNetSalary)}
                       </dd>
                     </dl>
                   </div>
@@ -229,7 +238,7 @@ const PayrollPage: React.FC = () => {
                         Total Charges
                       </dt>
                       <dd className="text-lg font-medium text-gray-900">
-                        {formatCurrency(totalTaxes)}
+                        {formatCdf(totalTaxes)}
                       </dd>
                     </dl>
                   </div>
@@ -266,6 +275,10 @@ const PayrollPage: React.FC = () => {
             </div>
           </div>
 
+          <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3">
+            {LEGAL_DISCLAIMER}
+          </p>
+
           {/* Liste des bulletins de paie */}
           <div className="bg-white shadow overflow-hidden sm:rounded-md">
             <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
@@ -273,56 +286,53 @@ const PayrollPage: React.FC = () => {
                 Bulletins de Paie - {currentPeriod ? format(new Date(currentPeriod.startDate), 'MMMM yyyy', { locale: fr }) : 'Période courante'}
               </h3>
               <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                Liste des bulletins de paie pour la période sélectionnée
+                Calcul légal : brut − INSS 5 % − IPR (barème 3 / 15 / 30 / 40 %) = net
               </p>
             </div>
             <ul className="divide-y divide-gray-200">
-              {filteredPayrolls.map((payroll) => (
-                <li key={payroll.id}>
+              {filteredSlips.map((slip) => (
+                <li key={slip.employeeId}>
                   <div className="px-4 py-4 sm:px-6 hover:bg-gray-50">
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
                           <h4 className="text-sm font-medium text-gray-900">
-                            {getEmployeeName(payroll.employeeId)}
+                            {slip.fullName}
                           </h4>
-                          <div className="flex items-center space-x-2">
-                            <span
-                              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(payroll.status)}`}
-                            >
-                              {getStatusText(payroll.status)}
-                            </span>
-                          </div>
                         </div>
                         <div className="mt-2 grid grid-cols-2 gap-4 sm:grid-cols-4 text-sm text-gray-600">
                           <div>
-                            <span className="font-medium">Salaire de base:</span>
-                            <div className="text-gray-900">{formatCurrency(payroll.baseSalary)}</div>
+                            <span className="font-medium">Brut</span>
+                            <div className="text-gray-900">{formatCdf(slip.gross)}</div>
                           </div>
                           <div>
-                            <span className="font-medium">Primes:</span>
-                            <div className="text-gray-900">{formatCurrency(payroll.bonuses)}</div>
+                            <span className="font-medium">INSS 5 %</span>
+                            <div className="text-gray-900">{formatCdf(slip.inssEmployee)}</div>
                           </div>
                           <div>
-                            <span className="font-medium">Déductions:</span>
-                            <div className="text-gray-900">{formatCurrency(payroll.deductions)}</div>
+                            <span className="font-medium">IPR</span>
+                            <div className="text-gray-900">{formatCdf(slip.ipr)}</div>
                           </div>
                           <div>
-                            <span className="font-medium">Net à payer:</span>
-                            <div className="text-lg font-semibold text-green-600">{formatCurrency(payroll.netSalary)}</div>
+                            <span className="font-medium">Net à payer</span>
+                            <div className="text-lg font-semibold text-green-600">{formatCdf(slip.net)}</div>
                           </div>
                         </div>
                       </div>
                       <div className="ml-4 flex-shrink-0 flex space-x-2">
                         <button
+                          type="button"
                           className="text-gray-400 hover:text-gray-600"
-                          title="Voir le détail"
+                          title="Voir le bulletin"
+                          onClick={() => openPayslipPrint(slip)}
                         >
                           <EyeIcon className="h-5 w-5" />
                         </button>
                         <button
+                          type="button"
                           className="text-blue-400 hover:text-blue-600"
-                          title="Télécharger PDF"
+                          title="Imprimer / PDF"
+                          onClick={() => openPayslipPrint(slip)}
                         >
                           <DocumentArrowDownIcon className="h-5 w-5" />
                         </button>

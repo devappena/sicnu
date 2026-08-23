@@ -187,8 +187,8 @@ export default function TrainingFormModal({
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-ena-blue-100 rounded-lg">
-                <AcademicCapIcon className="w-6 h-6 text-ena-blue-600" />
+              <div className="p-2 bg-cnu-blue-100 rounded-lg">
+                <AcademicCapIcon className="w-6 h-6 text-cnu-blue-600" />
               </div>
               <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 {training ? 'Modifier la formation' : 'Nouvelle formation'}
@@ -220,7 +220,7 @@ export default function TrainingFormModal({
                   onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                   placeholder="ex: Formation en Leadership Administratif"
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' 
                       : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -244,7 +244,7 @@ export default function TrainingFormModal({
                   onChange={(e) => setFormData(prev => ({ ...prev, instructor: e.target.value }))}
                   placeholder="ex: Dr. Jean-Pierre Mukendi"
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' 
                       : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -269,7 +269,7 @@ export default function TrainingFormModal({
                   value={formData.capacity}
                   onChange={(e) => setFormData(prev => ({ ...prev, capacity: parseInt(e.target.value) || 0 }))}
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white' 
                       : 'bg-white border-gray-300 text-gray-900'
@@ -294,7 +294,7 @@ export default function TrainingFormModal({
                 rows={4}
                 placeholder="Décrivez les objectifs, le contenu et les compétences à acquérir..."
                 className={`
-                  w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                  w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                   ${isDarkMode 
                     ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' 
                     : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -324,7 +324,7 @@ export default function TrainingFormModal({
                     value={formData.startDate}
                     onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
                     className={`
-                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                       ${isDarkMode 
                         ? 'bg-slate-700 border-slate-600 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
@@ -342,7 +342,7 @@ export default function TrainingFormModal({
                     value={formData.startTime}
                     onChange={(e) => setFormData(prev => ({ ...prev, startTime: e.target.value }))}
                     className={`
-                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                       ${isDarkMode 
                         ? 'bg-slate-700 border-slate-600 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
@@ -362,7 +362,7 @@ export default function TrainingFormModal({
                     value={formData.endDate}
                     onChange={(e) => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
                     className={`
-                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                       ${isDarkMode 
                         ? 'bg-slate-700 border-slate-600 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
@@ -380,7 +380,7 @@ export default function TrainingFormModal({
                     value={formData.endTime}
                     onChange={(e) => setFormData(prev => ({ ...prev, endTime: e.target.value }))}
                     className={`
-                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                      w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                       ${isDarkMode 
                         ? 'bg-slate-700 border-slate-600 text-white' 
                         : 'bg-white border-gray-300 text-gray-900'
@@ -401,12 +401,12 @@ export default function TrainingFormModal({
             {/* Durée calculée */}
             {formData.startDate && formData.endDate && (
               <div className={`
-                p-3 rounded-lg border-l-4 border-ena-blue-500 
-                ${isDarkMode ? 'bg-slate-700' : 'bg-ena-blue-50'}
+                p-3 rounded-lg border-l-4 border-cnu-blue-500 
+                ${isDarkMode ? 'bg-slate-700' : 'bg-cnu-blue-50'}
               `}>
                 <div className="flex items-center">
-                  <ClockIcon className="w-5 h-5 text-ena-blue-600 mr-2" />
-                  <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-ena-blue-800'}`}>
+                  <ClockIcon className="w-5 h-5 text-cnu-blue-600 mr-2" />
+                  <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-cnu-blue-800'}`}>
                     Durée: {calculateDuration()}
                   </span>
                 </div>
@@ -424,9 +424,9 @@ export default function TrainingFormModal({
                   type="text"
                   value={formData.location}
                   onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                  placeholder="ex: Salle de conférence ENA, Kinshasa"
+                  placeholder="ex: Salle de conférence CNU, Kinshasa"
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white placeholder-slate-400' 
                       : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
@@ -444,7 +444,7 @@ export default function TrainingFormModal({
                   value={formData.status}
                   onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as any }))}
                   className={`
-                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ena-blue-500 focus:border-ena-blue-500
+                    w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cnu-blue-500 focus:border-cnu-blue-500
                     ${isDarkMode 
                       ? 'bg-slate-700 border-slate-600 text-white' 
                       : 'bg-white border-gray-300 text-gray-900'
@@ -482,7 +482,7 @@ export default function TrainingFormModal({
                   px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors
                   ${isSubmitting 
                     ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-ena-blue-600 hover:bg-ena-blue-700'
+                    : 'bg-cnu-blue-600 hover:bg-cnu-blue-700'
                   }
                 `}
               >

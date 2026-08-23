@@ -5,9 +5,13 @@ interface PageHeaderProps {
   description: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   children?: React.ReactNode;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, description, icon: Icon, children }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title, description, icon: Icon, children, action }) => {
   return (
     <div 
       className="rounded-lg p-6 text-white"
@@ -25,11 +29,18 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, description, icon: Icon,
             {description}
           </p>
         </div>
-        {children && (
-          <div>
-            {children}
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          {action && (
+            <button
+              type="button"
+              onClick={action.onClick}
+              className="bg-white text-cnu-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50"
+            >
+              {action.label}
+            </button>
+          )}
+          {children}
+        </div>
       </div>
     </div>
   );

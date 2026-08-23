@@ -215,18 +215,6 @@ export interface TrainingProgram {
   certification: boolean;
 }
 
-export interface TimeSheet {
-  id: string;
-  employeeId: string;
-  date: Date;
-  clockIn: Date;
-  clockOut?: Date;
-  breakDuration: number; // en minutes
-  totalHours: number;
-  status: 'pending' | 'approved' | 'rejected';
-  notes?: string;
-}
-
 export interface Holiday {
   id: string;
   name: string;
@@ -402,65 +390,6 @@ export interface BudgetCategory {
   responsibleUserId?: string;
 }
 
-// === GESTION DU TEMPS AVANCÉE ===
-export interface AttendanceRecord {
-  id: string;
-  employeeId: string;
-  date: Date;
-  clockIn?: Date;
-  clockOut?: Date;
-  breaks: BreakRecord[];
-  totalWorkedHours: number;
-  scheduledHours: number;
-  overtimeHours: number;
-  status: 'present' | 'absent' | 'late' | 'half_day' | 'early_departure';
-  location?: string;
-  device?: string; // Pour le pointage
-  ipAddress?: string;
-  notes?: string;
-  approvedBy?: string;
-}
-
-export interface BreakRecord {
-  id: string;
-  startTime: Date;
-  endTime?: Date;
-  duration: number; // en minutes
-  type: 'lunch' | 'coffee' | 'personal' | 'meeting';
-  isPaid: boolean;
-}
-
-export interface WorkSchedule {
-  id: string;
-  employeeId: string;
-  name: string;
-  effectiveDate: Date;
-  endDate?: Date;
-  workDays: WorkDay[];
-  totalWeeklyHours: number;
-  isFlexible: boolean;
-  overtimeRules: OvertimeRule[];
-}
-
-export interface WorkDay {
-  dayOfWeek: 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 = Dimanche
-  isWorkDay: boolean;
-  startTime?: string; // "08:00"
-  endTime?: string; // "17:00"
-  breakDuration?: number; // en minutes
-  minimumHours?: number;
-}
-
-export interface OvertimeRule {
-  id: string;
-  name: string;
-  type: 'daily' | 'weekly' | 'holiday' | 'night';
-  threshold: number; // heures avant déclenchement
-  multiplier: number; // 1.5 pour 150%
-  maxHours?: number;
-  requiresApproval: boolean;
-}
-
 export interface OvertimeEntry {
   id: string;
   employeeId: string;
@@ -471,44 +400,6 @@ export interface OvertimeEntry {
   approvedBy?: string;
   status: 'pending' | 'approved' | 'rejected';
   payrollId?: string;
-}
-
-export interface TimeOffPolicy {
-  id: string;
-  name: string;
-  type: 'annual' | 'sick' | 'maternity' | 'paternity' | 'personal' | 'bereavement';
-  accrualRate: number; // jours par mois
-  maxAccrual: number;
-  maxCarryOver: number;
-  requiresApproval: boolean;
-  advanceNoticeRequired: number; // jours
-  blockoutPeriods: DateRange[];
-  eligibilityRules: string[];
-}
-
-export interface DateRange {
-  startDate: Date;
-  endDate: Date;
-  description?: string;
-}
-
-export interface ShiftPattern {
-  id: string;
-  name: string;
-  description: string;
-  shifts: Shift[];
-  rotationPeriod: number; // en jours
-  employees: string[];
-}
-
-export interface Shift {
-  id: string;
-  name: string;
-  startTime: string;
-  endTime: string;
-  color: string;
-  isNightShift: boolean;
-  overtimeMultiplier?: number;
 }
 
 // === NOTIFICATIONS AVANCÉES ===
@@ -571,4 +462,46 @@ export interface ReportSchedule {
   dayOfMonth?: number;
   time: string;
   isActive: boolean;
+}
+
+export interface JobOpening {
+  id: string;
+  title: string;
+  department: string;
+  type: 'cdi' | 'cdd' | 'stage' | 'consultant';
+  status: 'open' | 'interview' | 'closed';
+  openings: number;
+  publishedAt: Date;
+  description: string;
+}
+
+export interface Candidate {
+  id: string;
+  jobId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  status: 'received' | 'screening' | 'interview' | 'offer' | 'hired' | 'rejected';
+  appliedAt: Date;
+}
+
+export interface CareerCase {
+  id: string;
+  employeeName: string;
+  department: string;
+  startDate: Date;
+  type: 'onboarding' | 'offboarding';
+  progress: number;
+  tasks: Array<{ id: string; label: string; done: boolean }>;
+}
+
+export interface AttendanceRecord {
+  id: string;
+  employeeId: string;
+  date: string;
+  clockIn: string | null;
+  clockOut: string | null;
+  status: 'present' | 'late' | 'absent' | 'remote';
+  hours: number;
 }

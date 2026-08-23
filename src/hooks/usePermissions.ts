@@ -61,12 +61,10 @@ export const usePermissions = () => {
     canManagePayroll: hasPermission(userRole, 'manage_payroll'),
 
     canViewStatistics: hasPermission(userRole, 'view_statistics'),
-    canViewAdvancedStatistics: hasPermission(userRole, 'view_advanced_statistics'),
 
     canManageSettings: hasPermission(userRole, 'manage_settings'),
     canManageWorkflow: hasPermission(userRole, 'manage_workflow'),
 
-    canApproveTimesheet: hasPermission(userRole, 'approve_timesheet'),
     canApproveRoleChange: hasPermission(userRole, 'approve_role_change'),
   };
 };

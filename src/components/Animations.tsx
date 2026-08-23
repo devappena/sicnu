@@ -137,34 +137,6 @@ export const PulseElement: React.FC<AnimationProps> = ({
   );
 };
 
-// Composant de skeleton loading
-export const LoadingSkeleton: React.FC<{ 
-  width?: string; 
-  height?: string; 
-  className?: string;
-  lines?: number;
-}> = ({ 
-  width = '100%', 
-  height = '20px', 
-  className = '',
-  lines = 1 
-}) => {
-  return (
-    <div className={`space-y-2 ${className}`}>
-      {Array.from({ length: lines }).map((_, index) => (
-        <div
-          key={index}
-          className="animate-pulse bg-gray-200 rounded"
-          style={{
-            width: index === lines - 1 ? '75%' : width,
-            height
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 // Composant float
 export const FloatElement: React.FC<AnimationProps> = ({ 
   children, 

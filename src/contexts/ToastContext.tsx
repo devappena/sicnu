@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import type { ReactNode } from 'react';
 import Toast from '../components/Toast';
 import type { ToastType } from '../components/Toast';
-import { ToastContext } from './ToastContextDef';
+
+interface ToastContextType {
+  showToast: (type: ToastType, title: string, message?: string, duration?: number) => void;
+  hideToast: (id: string) => void;
+}
+
+export const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 interface ToastMessage {
   id: string;
@@ -25,7 +31,6 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     
     setToasts(prev => [...prev, newToast]);
 
-    // Auto-hide after duration
     if (duration > 0) {
       setTimeout(() => {
         hideToast(id);
@@ -41,7 +46,6 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
     <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
       
-      {/* Toast Container */}
       <div className="fixed top-4 right-4 z-50 space-y-2">
         {toasts.map(toast => (
           <Toast

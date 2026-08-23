@@ -62,8 +62,8 @@ export default function TrainingCalendar({ trainings, onTrainingClick }: Trainin
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-ena-blue-100 rounded-lg">
-            <CalendarIcon className="w-6 h-6 text-ena-blue-600" />
+          <div className="p-2 bg-cnu-blue-100 rounded-lg">
+            <CalendarIcon className="w-6 h-6 text-cnu-blue-600" />
           </div>
           <h2 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             Calendrier des Formations
@@ -126,13 +126,13 @@ export default function TrainingCalendar({ trainings, onTrainingClick }: Trainin
                 min-h-[80px] p-1 border rounded-lg transition-colors
                 ${isDarkMode ? 'border-slate-600' : 'border-gray-200'}
                 ${isCurrentMonth ? '' : 'opacity-50'}
-                ${isToday ? 'ring-2 ring-ena-blue-500' : ''}
+                ${isToday ? 'ring-2 ring-cnu-blue-500' : ''}
                 ${isDarkMode ? 'hover:bg-slate-700' : 'hover:bg-gray-50'}
               `}
             >
               <div className={`
                 text-sm font-medium mb-1
-                ${isToday ? 'text-ena-blue-600' : isDarkMode ? 'text-white' : 'text-gray-900'}
+                ${isToday ? 'text-cnu-blue-600' : isDarkMode ? 'text-white' : 'text-gray-900'}
               `}>
                 {format(day, 'd')}
               </div>

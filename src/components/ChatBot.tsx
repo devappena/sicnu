@@ -4,8 +4,10 @@ import {
   XMarkIcon,
   SparklesIcon,
   UserIcon,
-  ComputerDesktopIcon
+  ComputerDesktopIcon,
+  ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
+import { SparklesIcon as SparklesSolidIcon } from '@heroicons/react/24/solid';
 import { FadeIn } from './Animations';
 import { findBestMatches, getPageSuggestions, type KnowledgeItem } from '../utils/knowledgeBase';
 
@@ -18,19 +20,15 @@ interface Message {
   knowledgeItem?: KnowledgeItem;
 }
 
-interface ChatBotProps {
-  isOpen: boolean;
-  onToggle: () => void;
-}
-
 // Messages d'accueil
 const welcomeMessages = [
-  "Bonjour ! Je suis l'assistant IA du Portail RH ENA. Comment puis-je vous aider aujourd'hui ?",
-  "Salut ! Besoin d'aide avec les ressources humaines ? Je suis là pour vous !",
-  "Bonjour ! Votre assistant RH virtuel ENA à votre service !"
+  "Bonjour ! Je suis l'assistant de SICNU. Comment puis-je vous aider aujourd'hui ?",
+  "Salut ! Besoin d'aide avec les ressources humaines de la CNU-RDC ? Je suis là pour vous.",
+  "Bonjour ! Votre assistant RH virtuel SICNU à votre service."
 ];
 
-const ChatBot: React.FC<ChatBotProps> = ({ isOpen, onToggle }) => {
+const ChatBot: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -74,14 +72,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ isOpen, onToggle }) => {
     // Réponse par défaut si aucune correspondance
     const defaultResponses = [
       "Je peux vous aider avec les congés, formations, paie, horaires, évaluations. Posez-moi votre question !",
-      "Pour une assistance personnalisée, contactez les RH au 01.44.41.85.85 ou rh@ena.gouv.fr",
+      "Pour une assistance personnalisée, contactez les RH à rh@comnat-unesco.cd",
       "Consultez aussi notre FAQ dans l'aide en ligne ou le guide utilisateur du portail."
     ];
     
     return {
       response: defaultResponses[Math.floor(Math.random() * defaultResponses.length)],
       actions: [
-        { text: "Contacter les RH", url: "tel:0144418585", type: "external" as const },
+        { text: "Contacter les RH", url: "mailto:rh@comnat-unesco.cd", type: "external" as const },
         { text: "Voir l'aide", url: "/help", type: "navigation" as const }
       ]
     };
@@ -143,9 +141,27 @@ const ChatBot: React.FC<ChatBotProps> = ({ isOpen, onToggle }) => {
 
   const quickSuggestions = getPageSuggestions(window.location.pathname);
 
-  if (!isOpen) return null;
+  const toggleChat = () => setIsOpen((open) => !open);
 
   return (
+    <>
+      <button
+        onClick={toggleChat}
+        className="fixed bottom-6 right-20 w-14 h-14 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-40 hover:scale-110"
+        title="Assistant SICNU"
+      >
+        {isOpen ? (
+          <ChatBubbleLeftRightIcon className="h-6 w-6" />
+        ) : (
+          <div className="relative">
+            <ChatBubbleLeftRightIcon className="h-6 w-6" />
+            <SparklesSolidIcon className="h-3 w-3 absolute -top-1 -right-1 text-yellow-300" />
+            <div className="absolute -top-2 -right-2 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+          </div>
+        )}
+      </button>
+
+      {isOpen && (
     <FadeIn>
       <div className="fixed bottom-20 right-20 w-96 h-[600px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col z-50">
         {/* Header */}
@@ -155,12 +171,12 @@ const ChatBot: React.FC<ChatBotProps> = ({ isOpen, onToggle }) => {
               <SparklesIcon className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="font-semibold">Assistant IA ENA</h3>
+              <h3 className="font-semibold">Assistant SICNU</h3>
               <p className="text-xs opacity-90">Ressources Humaines</p>
             </div>
           </div>
           <button
-            onClick={onToggle}
+            onClick={toggleChat}
             className="p-1 hover:bg-white/20 rounded-lg transition-colors"
           >
             <XMarkIcon className="h-5 w-5" />
@@ -276,6 +292,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ isOpen, onToggle }) => {
         </div>
       </div>
     </FadeIn>
+      )}
+    </>
   );
 };
 

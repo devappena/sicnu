@@ -76,10 +76,10 @@ function EmployeeCard({ employee, onView, onEdit, onDelete }: EmployeeCardProps)
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 hover:border-ena-blue-300 hover:shadow-sm transition-all duration-200 p-3">
+    <div className="bg-white rounded-lg border border-gray-200 hover:border-cnu-blue-300 hover:shadow-sm transition-all duration-200 p-3">
       {/* Header avec avatar et statut */}
       <div className="flex items-center justify-between mb-2">
-        <div className="w-8 h-8 bg-gradient-to-br from-ena-blue-500 to-ena-blue-600 rounded-full flex items-center justify-center text-white font-medium text-xs">
+        <div className="w-8 h-8 bg-gradient-to-br from-cnu-blue-500 to-cnu-blue-600 rounded-full flex items-center justify-center text-white font-medium text-xs">
           {employee.firstName.charAt(0)}{employee.lastName.charAt(0)}
         </div>
         <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(employee.status)}`}>
@@ -93,7 +93,7 @@ function EmployeeCard({ employee, onView, onEdit, onDelete }: EmployeeCardProps)
           {employee.firstName} {employee.lastName}
         </h3>
         <p className="text-xs text-gray-600 truncate">{employee.position}</p>
-        <p className="text-xs text-ena-blue-600 font-medium truncate">{employee.department}</p>
+        <p className="text-xs text-cnu-blue-600 font-medium truncate">{employee.department}</p>
       </div>
 
       {/* Informations compactes */}
@@ -122,7 +122,7 @@ function EmployeeCard({ employee, onView, onEdit, onDelete }: EmployeeCardProps)
       <div className="flex justify-center space-x-1">
         <button
           onClick={() => onView(employee)}
-          className="p-1.5 text-gray-500 hover:text-ena-blue-600 hover:bg-ena-blue-50 rounded transition-colors"
+          className="p-1.5 text-gray-500 hover:text-cnu-blue-600 hover:bg-cnu-blue-50 rounded transition-colors"
           title="Voir les détails"
         >
           <EyeIcon className="h-3.5 w-3.5" />
@@ -362,7 +362,7 @@ export default function Employees() {
               'Date d\'embauche': format(emp.hireDate, 'dd/MM/yyyy', { locale: fr })
             }))}
             filename="employes_ena"
-            title="Liste des Employés - ENA"
+            title="Liste des Employés - CNU-RDC"
           />
           <button
             onClick={handleAddEmployee}

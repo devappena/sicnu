@@ -3,6 +3,8 @@
  * Centralise toutes les variables d'environnement et configurations
  */
 
+import { identity } from './identity';
+
 // Fonction helper pour obtenir une variable d'environnement
 const getEnvVar = (key: string, defaultValue?: string): string => {
   const value = import.meta.env[key];
@@ -41,8 +43,8 @@ export const apiConfig = {
  * Configuration de l'authentification
  */
 export const authConfig = {
-  tokenStorageKey: getEnvVar('VITE_TOKEN_STORAGE_KEY', 'ena-auth-token'),
-  refreshTokenKey: getEnvVar('VITE_REFRESH_TOKEN_KEY', 'ena-refresh-token'),
+  tokenStorageKey: getEnvVar('VITE_TOKEN_STORAGE_KEY', 'sicnu-auth-token'),
+  refreshTokenKey: getEnvVar('VITE_REFRESH_TOKEN_KEY', 'sicnu-refresh-token'),
   tokenExpirationTime: getNumberEnvVar('VITE_TOKEN_EXPIRATION', 3600000), // 1 heure par défaut
 } as const;
 
@@ -64,7 +66,7 @@ export const appConfig = {
   env: getEnvVar('VITE_APP_ENV', 'development'),
   isDevelopment: getEnvVar('VITE_APP_ENV', 'development') === 'development',
   isProduction: getEnvVar('VITE_APP_ENV', 'development') === 'production',
-  appName: 'ENA Portail RH',
+  appName: identity.appName,
   appVersion: '1.0.0',
 } as const;
 

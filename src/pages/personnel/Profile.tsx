@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   UserIcon,
   EnvelopeIcon,
@@ -10,56 +10,85 @@ import {
   DocumentTextIcon,
   CameraIcon
 } from '@heroicons/react/24/outline';
+import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { useAuth } from '../../contexts/AuthContext';
 import PageHeader from '../../components/PageHeader';
 import Card from '../../components/Card';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import ErrorMessage from '../../components/ErrorMessage';
 import { useToast } from '../../hooks/useToast';
-import { useEmployee, useUpdateEmployee, useChangePassword } from '../../hooks/api';
+import { useUpdateEmployee, useChangePassword } from '../../hooks/api';
+import { mockEmployees } from '../../data/mockData';
+import { mockUsers } from '../../data/mockUsers';
+import type { Employee } from '../../types';
+
+function buildProfileEmployee(
+  user: { id: string; email: string; firstName: string; lastName: string; role: string } | null
+): Employee | null {
+  if (!user) return null;
+
+  const fromStaff = mockEmployees.find(
+    (employee) => employee.email.toLowerCase() === user.email.toLowerCase()
+  );
+  if (fromStaff) return fromStaff;
+
+  const account = mockUsers.find(
+    (item) => item.id === user.id || item.email.toLowerCase() === user.email.toLowerCase()
+  );
+
+  return {
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    phone: '',
+    position: account?.position || user.role,
+    department: account?.department || '',
+    salary: 0,
+    hireDate: new Date('2020-01-15'),
+    status: 'active',
+    address: '',
+    dateOfBirth: new Date('1990-01-01'),
+    emergencyContact: {
+      name: '',
+      phone: '',
+      relationship: '',
+    },
+  };
+}
 
 const Profile: React.FC = () => {
   const { user } = useAuth();
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState<'info' | 'security' | 'documents'>('info');
 
-  // React Query hooks
-  const { data: employee, isLoading, error } = useEmployee(user?.id || '');
+  const employee = useMemo(() => buildProfileEmployee(user), [user]);
   const updateEmployee = useUpdateEmployee();
   const changePassword = useChangePassword();
 
   const [formData, setFormData] = useState({
-    firstName: employee?.firstName || '',
-    lastName: employee?.lastName || '',
-    email: employee?.email || '',
-    phone: employee?.phone || '',
-    address: employee?.address || '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
   });
+
+  useEffect(() => {
+    if (!employee) return;
+    setFormData({
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      email: employee.email,
+      phone: employee.phone,
+      address: employee.address,
+    });
+  }, [employee]);
 
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
-
-  // Loading state
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <LoadingSpinner size="lg" />
-      </div>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <ErrorMessage 
-        message="Erreur lors du chargement du profil" 
-        error={error}
-      />
-    );
-  }
 
   const handleUpdateProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,7 +122,7 @@ const Profile: React.FC = () => {
 
     changePassword.mutate(
       {
-        currentPassword: passwordData.currentPassword,
+        oldPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       },
       {
@@ -114,22 +143,25 @@ const Profile: React.FC = () => {
     { id: 'documents' as const, label: 'Documents', icon: DocumentTextIcon },
   ];
 
+  const hireDateLabel = employee?.hireDate
+    ? format(new Date(employee.hireDate), 'dd MMMM yyyy', { locale: fr })
+    : 'N/A';
+
   return (
     <div className="space-y-6">
       <PageHeader
-        title={`Profil de ${user?.firstName} ${user?.lastName}`}
+        title={`Profil de ${user?.firstName ?? ''} ${user?.lastName ?? ''}`.trim()}
         description="Gérez vos informations personnelles et paramètres"
         icon={UserIcon}
       />
 
-      {/* Photo de profil */}
       <Card>
         <div className="flex items-center space-x-6">
           <div className="relative">
             <div className="h-24 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold">
               {user?.firstName?.charAt(0)}{user?.lastName?.charAt(0)}
             </div>
-            <button className="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-lg border-2 border-gray-200 hover:bg-gray-50">
+            <button type="button" className="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-lg border-2 border-gray-200 hover:bg-gray-50">
               <CameraIcon className="h-4 w-4 text-gray-600" />
             </button>
           </div>
@@ -138,12 +170,11 @@ const Profile: React.FC = () => {
               {user?.firstName} {user?.lastName}
             </h3>
             <p className="text-gray-600">{employee?.position || user?.role}</p>
-            <p className="text-sm text-gray-500">{employee?.department || 'RH'}</p>
+            <p className="text-sm text-gray-500">{employee?.department || '—'}</p>
           </div>
         </div>
       </Card>
 
-      {/* Tabs */}
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-8">
           {tabs.map((tab) => {
@@ -151,6 +182,7 @@ const Profile: React.FC = () => {
             return (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={`
                   group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm
@@ -173,7 +205,6 @@ const Profile: React.FC = () => {
         </nav>
       </div>
 
-      {/* Informations personnelles */}
       {activeTab === 'info' && (
         <Card>
           <h3 className="text-lg font-medium text-gray-900 mb-4">Informations personnelles</h3>
@@ -260,7 +291,6 @@ const Profile: React.FC = () => {
               </div>
             </div>
 
-            {/* Informations professionnelles en lecture seule */}
             <div className="border-t pt-4 mt-4">
               <h4 className="text-md font-medium text-gray-900 mb-3">Informations professionnelles</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -279,7 +309,7 @@ const Profile: React.FC = () => {
                 <div className="flex items-center space-x-2 text-gray-700">
                   <CalendarIcon className="h-5 w-5 text-gray-400" />
                   <span className="text-sm">
-                    <strong>Date d'embauche:</strong> {employee?.hireDate || 'N/A'}
+                    <strong>Date d'embauche:</strong> {hireDateLabel}
                   </span>
                 </div>
               </div>
@@ -297,7 +327,6 @@ const Profile: React.FC = () => {
         </Card>
       )}
 
-      {/* Sécurité */}
       {activeTab === 'security' && (
         <Card>
           <h3 className="text-lg font-medium text-gray-900 mb-4">Changer le mot de passe</h3>
@@ -354,7 +383,6 @@ const Profile: React.FC = () => {
         </Card>
       )}
 
-      {/* Documents */}
       {activeTab === 'documents' && (
         <Card>
           <h3 className="text-lg font-medium text-gray-900 mb-4">Mes documents</h3>
@@ -367,7 +395,7 @@ const Profile: React.FC = () => {
                   <p className="text-sm text-gray-500">Dernière modification: 15 janv. 2024</p>
                 </div>
               </div>
-              <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              <button type="button" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
                 Télécharger
               </button>
             </div>
@@ -380,7 +408,7 @@ const Profile: React.FC = () => {
                   <p className="text-sm text-gray-500">12 derniers mois disponibles</p>
                 </div>
               </div>
-              <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              <button type="button" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
                 Voir tout
               </button>
             </div>
@@ -393,7 +421,7 @@ const Profile: React.FC = () => {
                   <p className="text-sm text-gray-500">3 certificats</p>
                 </div>
               </div>
-              <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+              <button type="button" className="text-blue-600 hover:text-blue-800 text-sm font-medium">
                 Télécharger
               </button>
             </div>

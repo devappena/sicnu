@@ -111,7 +111,7 @@ export default function GlobalSearch({ onSelectResult, onClose, className = '' }
       const mockDocuments = [
         {
           id: 'doc1',
-          title: 'Règlement Intérieur ENA',
+          title: 'Règlement intérieur CNU-RDC',
           type: 'PDF',
           category: 'Règlementation',
           lastModified: '2024-12-01'

@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import axios from 'axios';
+import type { AxiosInstance, AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import { apiConfig, authConfig } from '@/config/app.config';
 
 /**
@@ -71,7 +72,8 @@ apiClient.interceptors.response.use(
           }
           localStorage.removeItem(authConfig.tokenStorageKey);
           localStorage.removeItem(authConfig.refreshTokenKey);
-          window.location.href = '/auth/login';
+          const basename = import.meta.env.BASE_URL.replace(/\/$/, '');
+          window.location.href = `${basename}/auth/login`;
           break;
 
         case 403:

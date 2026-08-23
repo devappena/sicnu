@@ -1,6 +1,6 @@
 /**
- * Utilisateurs de test pour le développement
- * À REMPLACER par une vraie API en production
+ * Utilisateurs de démonstration.
+ * À remplacer par l’authentification réelle de l’API SICNU.
  */
 
 export interface MockUser {
@@ -17,67 +17,54 @@ export interface MockUser {
 export const mockUsers: MockUser[] = [
   {
     id: '1',
-    email: 'superadmin@ena.cd',
+    email: 'superadmin@comnat-unesco.cd',
     password: 'SuperAdmin2024!',
-    firstName: 'Victor',
-    lastName: 'Bafuafua',
+    firstName: 'Aline',
+    lastName: 'Kalala',
     role: 'super_admin',
-    department: 'Direction Générale',
-    position: 'Directeur Général'
+    department: 'Secrétariat général',
+    position: 'Secrétaire générale',
   },
   {
     id: '2',
-    email: 'admin@ena.cd',
+    email: 'admin@comnat-unesco.cd',
     password: 'Admin2024!',
     firstName: 'Marie',
     lastName: 'Kabongo',
     role: 'admin',
     department: 'Administration',
-    position: 'Administrateur Système'
+    position: 'Administratrice système',
   },
   {
     id: '3',
-    email: 'rh@ena.cd',
+    email: 'rh@comnat-unesco.cd',
     password: 'RH2024!',
     firstName: 'Jean',
     lastName: 'Mukendi',
     role: 'hr',
-    department: 'Ressources Humaines',
-    position: 'Responsable RH'
+    department: 'Ressources humaines',
+    position: 'Responsable RH',
   },
   {
     id: '4',
-    email: 'employe@ena.cd',
-    password: 'Employe2024!',
+    email: 'agent@comnat-unesco.cd',
+    password: 'Agent2024!',
     firstName: 'Grace',
     lastName: 'Tshimanga',
     role: 'employee',
-    department: 'Administration',
-    position: 'Assistant Administratif'
-  }
+    department: 'Programmes',
+    position: 'Assistante administrative',
+  },
 ];
 
-/**
- * Authentifier un utilisateur (MOCK)
- * À REMPLACER par un appel API réel
- */
 export const authenticateUser = (email: string, password: string): MockUser | null => {
-  const user = mockUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
-  
-  if (!user) {
+  const user = mockUsers.find((u) => u.email.toLowerCase() === email.toLowerCase());
+  if (!user || user.password !== password) {
     return null;
   }
-  
-  if (user.password !== password) {
-    return null;
-  }
-  
   return user;
 };
 
-/**
- * Obtenir un utilisateur par email (MOCK)
- */
 export const getUserByEmail = (email: string): MockUser | null => {
-  return mockUsers.find(u => u.email.toLowerCase() === email.toLowerCase()) || null;
+  return mockUsers.find((u) => u.email.toLowerCase() === email.toLowerCase()) || null;
 };

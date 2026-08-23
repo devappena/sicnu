@@ -18,6 +18,8 @@ import {
 } from '../../hooks/api';
 import type { Absence } from '../../types';
 import { useToast } from '../../hooks/useToast';
+import { mockLeaveBalances, mockEmployees } from '../../data/mockData';
+import { annualLeaveEntitlementDays, canTakeAnnualLeave, LEGAL_DISCLAIMER } from '../../legal/rdc';
 
 const Absences: React.FC = () => {
   // Local state
@@ -133,6 +135,36 @@ const Absences: React.FC = () => {
           onClick: () => setIsFormOpen(true)
         }}
       />
+
+      <p className="text-sm text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-3">
+        Congés selon le Code du travail (Loi 015/2002) : 1 jour ouvrable par mois, +1 jour tous les 5 ans d’ancienneté, ouverture après 12 mois. {LEGAL_DISCLAIMER}
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {mockLeaveBalances.slice(0, 3).map((balance) => {
+          const employee = employeesList.find((item) => item.id === balance.employeeId)
+            ?? mockEmployees.find((item) => item.id === balance.employeeId);
+          const legalDays = employee
+            ? annualLeaveEntitlementDays(employee.hireDate, employee.dateOfBirth)
+            : balance.annualLeave.total;
+          const eligible = employee ? canTakeAnnualLeave(employee.hireDate) : true;
+          return (
+            <Card key={balance.employeeId} padding="sm">
+              <p className="text-sm font-medium text-gray-900">
+                {employee ? `${employee.firstName} ${employee.lastName}` : `Agent ${balance.employeeId}`}
+              </p>
+              <p className="text-xs text-gray-500 mb-3">
+                Droit légal {legalDays} j. · {eligible ? 'Ouvert' : 'Pas encore 12 mois'}
+              </p>
+              <div className="space-y-1 text-sm text-gray-700">
+                <div className="flex justify-between"><span>Congés annuels</span><span>{balance.annualLeave.remaining}/{legalDays}</span></div>
+                <div className="flex justify-between"><span>Maladie</span><span>{balance.sickLeave.remaining}/{balance.sickLeave.total}</span></div>
+                <div className="flex justify-between"><span>Personnel</span><span>{balance.personalLeave.remaining}/{balance.personalLeave.total}</span></div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
 
       {/* Statistiques */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

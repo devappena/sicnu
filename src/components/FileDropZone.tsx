@@ -221,12 +221,12 @@ export default function FileDropZone({
         onClick={openFileDialog}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200 ${
           isDragOver
-            ? 'border-ena-blue-500 bg-ena-blue-50 scale-105'
-            : 'border-gray-300 hover:border-ena-blue-400 hover:bg-gray-50'
+            ? 'border-cnu-blue-500 bg-cnu-blue-50 scale-105'
+            : 'border-gray-300 hover:border-cnu-blue-400 hover:bg-gray-50'
         }`}
       >
         <CloudArrowUpIcon className={`mx-auto h-12 w-12 mb-4 ${
-          isDragOver ? 'text-ena-blue-500' : 'text-gray-400'
+          isDragOver ? 'text-cnu-blue-500' : 'text-gray-400'
         }`} />
         
         <div className="space-y-2">
@@ -234,7 +234,7 @@ export default function FileDropZone({
             {isDragOver ? 'Déposez vos fichiers ici' : 'Glissez-déposez vos fichiers'}
           </p>
           <p className="text-sm text-gray-600">
-            ou <span className="text-ena-blue-600 font-medium">cliquez pour parcourir</span>
+            ou <span className="text-cnu-blue-600 font-medium">cliquez pour parcourir</span>
           </p>
           <p className="text-xs text-gray-500">
             {acceptedTypes.join(', ')} • Max {maxSize}MB • {maxFiles} fichiers max
@@ -289,7 +289,7 @@ export default function FileDropZone({
                     <div className="mt-1">
                       <div className="bg-gray-200 rounded-full h-1.5">
                         <div 
-                          className="bg-ena-blue-500 h-1.5 rounded-full transition-all duration-300"
+                          className="bg-cnu-blue-500 h-1.5 rounded-full transition-all duration-300"
                           style={{ width: `${file.progress}%` }}
                         />
                       </div>
@@ -306,7 +306,7 @@ export default function FileDropZone({
                     <ExclamationTriangleIcon className="h-5 w-5 text-red-500" />
                   )}
                   {file.status === 'uploading' && (
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-ena-blue-500" />
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-cnu-blue-500" />
                   )}
                 </div>
 

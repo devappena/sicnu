@@ -1,4 +1,5 @@
 import React from 'react';
+import { identity } from '../config/identity';
 
 interface VersionInfoProps {
   variant?: 'footer' | 'sidebar' | 'modal' | 'badge';
@@ -11,7 +12,7 @@ const VersionInfo: React.FC<VersionInfoProps> = ({
 }) => {
   // Version hardcodée pour éviter les problèmes d'import de package.json
   const version = '1.0.0';
-  const appName = 'ENA Portail RH';
+  const appName = identity.appName;
 
   const getVariantStyles = () => {
     switch (variant) {
@@ -22,7 +23,7 @@ const VersionInfo: React.FC<VersionInfoProps> = ({
       case 'modal':
         return 'text-sm text-gray-600 font-mono bg-gray-100 px-3 py-2 rounded-lg';
       case 'badge':
-        return 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ena-blue-100 text-ena-blue-800';
+        return 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cnu-blue-100 text-cnu-blue-800';
       default:
         return 'text-xs text-gray-500';
     }

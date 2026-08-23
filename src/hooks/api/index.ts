@@ -24,9 +24,5 @@ export * from './useStatistics';
 // Hooks pour les notifications
 export * from './useNotifications';
 
-// Hooks pour les feuilles de temps
-export * from './useTimesheets';
-
 // Hooks pour les paramètres
 export * from './useSettings';
-// export * from './useSettings';
