@@ -8,7 +8,7 @@ import { useToast } from '../../hooks/useToast';
 import { useAuth } from '../../contexts/AuthContext';
 import cnuLogo from '../../assets/images/cnu-logo.svg';
 import { authenticateUser } from '../../data/mockUsers';
-import { demoAccounts, identity } from '../../config/identity';
+import { identity } from '../../config/identity';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -249,23 +249,6 @@ const Login: React.FC = () => {
                 )}
               </button>
             </form>
-
-            <div className="mt-6 rounded-lg bg-slate-50 p-4 text-left">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">
-                Comptes de démonstration
-              </p>
-              <ul className="space-y-1.5 text-xs text-slate-700">
-                {demoAccounts.map((account) => (
-                  <li key={account.email}>
-                    <span className="font-medium">{account.role}</span>
-                    {' — '}
-                    <span className="font-mono">{account.email}</span>
-                    {' / '}
-                    <span className="font-mono">{account.password}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
