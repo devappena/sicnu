@@ -7,7 +7,7 @@ import {
 import { useToast } from '../../hooks/useToast';
 import { useAuth } from '../../contexts/AuthContext';
 import { authService } from '../../api';
-import cnuLogo from '../../assets/images/cnu-logo.svg';
+import cnuLogo from '../../assets/images/Logo.jpg';
 import { identity } from '../../config/identity';
 
 const Login: React.FC = () => {
@@ -121,7 +121,7 @@ const Login: React.FC = () => {
       {/* Écran de chargement pendant la vérification de l'authentification */}
       {authLoading ? (
         <div className="text-center">
-          <div className="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center mb-4 p-2 animate-pulse">
+          <div className="mx-auto h-24 w-24 bg-white rounded-2xl flex items-center justify-center mb-4 p-1.5 animate-pulse overflow-hidden">
             <img 
               src={cnuLogo} 
               alt={`Logo ${identity.orgShort}`} 
@@ -134,7 +134,7 @@ const Login: React.FC = () => {
         <div className="max-w-md w-full">
           {/* Logo et titre */}
           <div className="text-center mb-8">
-            <div className="mx-auto h-16 w-16 bg-white rounded-full flex items-center justify-center mb-3 p-2">
+            <div className="mx-auto h-24 w-24 bg-white rounded-2xl flex items-center justify-center mb-3 p-1.5 overflow-hidden shadow-lg">
               <img 
                 src={cnuLogo} 
                 alt={`Logo ${identity.orgShort}`} 

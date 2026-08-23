@@ -5,7 +5,7 @@ import {
   EyeSlashIcon
 } from '@heroicons/react/24/outline';
 import { useToast } from '../../hooks/useToast';
-import cnuLogo from '../../assets/images/cnu-logo.svg';
+import cnuLogo from '../../assets/images/Logo.jpg';
 import { identity } from '../../config/identity';
 
 const Register: React.FC = () => {
@@ -115,7 +115,7 @@ const Register: React.FC = () => {
       <div className="max-w-2xl w-full space-y-8">
         {/* Logo et titre */}
         <div className="text-center">
-          <div className="mx-auto h-20 w-20 bg-white rounded-full flex items-center justify-center mb-4 p-2">
+          <div className="mx-auto h-24 w-24 bg-white rounded-2xl flex items-center justify-center mb-4 p-1.5 overflow-hidden shadow-lg">
             <img 
               src={cnuLogo} 
               alt={`Logo ${identity.orgShort}`} 

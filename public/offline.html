@@ -24,17 +24,22 @@
         }
         
         .logo {
-            width: 80px;
-            height: 80px;
+            width: 96px;
+            height: 96px;
             margin: 0 auto 2rem;
             background: white;
-            border-radius: 50%;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #1c3d8f;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         
         h1 {
@@ -74,7 +79,9 @@
 </head>
 <body>
     <div class="container">
-        <div class="logo">CNU</div>
+        <div class="logo">
+            <img src="/cnu-logo.jpg" alt="Logo CNU-RDC" />
+        </div>
         <h1>Vous êtes hors ligne</h1>
         <p>
             Votre connexion internet semble interrompue. 

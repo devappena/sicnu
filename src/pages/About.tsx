@@ -8,7 +8,7 @@ import {
   ArrowLeftIcon
 } from '@heroicons/react/24/outline';
 import VersionInfo from '../components/VersionInfo';
-import cnuLogo from '../assets/images/cnu-logo.svg';
+import cnuLogo from '../assets/images/Logo.jpg';
 import { identity } from '../config/identity';
 
 const About: React.FC = () => {
@@ -28,11 +28,11 @@ const About: React.FC = () => {
           </Link>
           
           <div className="text-center">
-            <div className="mx-auto h-24 w-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg">
+            <div className="mx-auto h-28 w-28 bg-white rounded-2xl flex items-center justify-center mb-6 p-1.5 overflow-hidden shadow-lg">
               <img 
                 src={cnuLogo} 
                 alt={`Logo ${identity.orgShort}`} 
-                className="h-16 w-16 object-contain"
+                className="h-full w-full object-contain"
               />
             </div>
             <h1 className="text-4xl font-bold text-gray-900 mb-2">

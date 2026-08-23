@@ -1,5 +1,5 @@
 import React from 'react';
-import cnuLogoImage from '../assets/images/cnu-logo.svg';
+import cnuLogoImage from '../assets/images/Logo.jpg';
 import { identity } from '../config/identity';
 
 interface LogoProps {
@@ -29,11 +29,11 @@ const Logo: React.FC<LogoProps> = ({
 
   return (
     <div className={`flex items-center space-x-3 ${className}`}>
-      <div className={`${sizeClasses[size]} flex-shrink-0 bg-white bg-opacity-20 rounded-lg p-1`}>
+      <div className={`${sizeClasses[size]} flex-shrink-0 overflow-hidden rounded-lg bg-white shadow-sm`}>
         <img 
           src={cnuLogoImage} 
           alt={`Logo ${identity.orgShort} — ${identity.orgName}`} 
-          className="h-full w-full object-contain drop-shadow-md hover:drop-shadow-lg transition-all duration-200"
+          className="h-full w-full object-contain"
         />
       </div>
       {showText && (
