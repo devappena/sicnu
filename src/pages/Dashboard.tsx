@@ -157,7 +157,7 @@ export default function Dashboard() {
     { 
       id: 5, 
       type: 'Anniversaire', 
-      description: 'C\'est l\'anniversaire de Claude Mujinga aujourd\'hui', 
+      description: 'C\'est l\'anniversaire de Yasmine Kabanga aujourd\'hui', 
       time: '6 heures',
       icon: BellIcon,
       color: 'text-pink-600',

@@ -26,10 +26,10 @@ Comptes de démonstration :
 
 | Rôle | Email | Mot de passe |
 | --- | --- | --- |
-| Administrateur | `admin@shodow.com` | `996633a` |
-| DRH | `drh@shodow.com` | `996633a` |
-| Agent | `agent1@shodow.com` | `996633a` |
-| Agent | `agent2@shodow.com` | `996633a` |
+| Administrateur | `admin@shodan.cd` | `996633a` |
+| DRH | `drh@shodan.cd` | `996633a` |
+| Agent | `agent1@shodan.cd` | `996633a` |
+| Agent | `agent2@shodan.cd` | `996633a` |
 
 ## Structure
 

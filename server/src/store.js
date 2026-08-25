@@ -4,14 +4,14 @@ import { fileURLToPath } from 'url';
 
 const repoDataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data');
 const dataDir = process.env.VERCEL ? path.join('/tmp', 'sicnu-data') : repoDataDir;
-const employeesFile = path.join(dataDir, 'employees.json');
+const employeesFile = path.join(dataDir, process.env.VERCEL ? 'employees-v2.json' : 'employees.json');
 
 const seedEmployees = [
   {
     id: '1',
     firstName: 'Victor',
-    lastName: 'Bafuafua',
-    email: 'admin@shodow.com',
+    lastName: 'Bafuafua Mande',
+    email: 'admin@shodan.cd',
     phone: '+243 810 000 001',
     position: 'Administrateur',
     department: 'Secrétariat général',
@@ -24,11 +24,11 @@ const seedEmployees = [
   },
   {
     id: '2',
-    firstName: 'Jacqueline',
-    lastName: 'Mbombo',
-    email: 'drh@shodow.com',
+    firstName: 'Jonas',
+    lastName: 'Maki Busha',
+    email: 'drh@shodan.cd',
     phone: '+243 810 000 002',
-    position: 'Directrice RH',
+    position: 'Directeur RH',
     department: 'Ressources humaines',
     salary: 1200000,
     hireDate: '2021-03-10T00:00:00.000Z',
@@ -39,9 +39,9 @@ const seedEmployees = [
   },
   {
     id: '3',
-    firstName: 'Kizir',
-    lastName: '',
-    email: 'agent1@shodow.com',
+    firstName: 'Junior',
+    lastName: 'Kizir Woldia',
+    email: 'agent1@shodan.cd',
     phone: '+243 810 000 003',
     position: 'Assistant administratif',
     department: 'Programmes',
@@ -54,11 +54,11 @@ const seedEmployees = [
   },
   {
     id: '4',
-    firstName: 'Mwema',
-    lastName: '',
-    email: 'agent2@shodow.com',
+    firstName: 'Ghislain',
+    lastName: 'Baende',
+    email: 'agent2@shodan.cd',
     phone: '+243 810 000 004',
-    position: 'Chargée de programmes',
+    position: 'Chargé de programmes',
     department: 'Programmes',
     salary: 650000,
     hireDate: '2022-06-01T00:00:00.000Z',
@@ -69,18 +69,18 @@ const seedEmployees = [
   },
   {
     id: '5',
-    firstName: 'Claude',
-    lastName: 'Mujinga',
-    email: 'claude.mujinga@comnat-unesco.cd',
+    firstName: 'Yasmine',
+    lastName: 'Kabanga',
+    email: 'yasmine.kabanga@shodan.cd',
     phone: '+243 810 000 005',
-    position: 'Chargé de communication',
+    position: 'Chargée de communication',
     department: 'Communication',
     salary: 700000,
     hireDate: '2021-06-15T00:00:00.000Z',
-    dateOfBirth: '1980-12-08T00:00:00.000Z',
+    dateOfBirth: '1996-12-08T00:00:00.000Z',
     status: 'active',
     address: 'Kinshasa',
-    emergencyContact: { name: 'Sylvie Mujinga', phone: '+243 810 000 015', relationship: 'Épouse' },
+    emergencyContact: { name: '', phone: '', relationship: '' },
   },
 ];
 

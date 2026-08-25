@@ -109,8 +109,8 @@ export const mockCareerCases: CareerCase[] = [
   },
   {
     id: 'off-1',
-    employeeName: 'Claude Mujinga',
-    department: 'Sécurité',
+    employeeName: 'Yasmine Kabanga',
+    department: 'Communication',
     startDate: new Date('2026-09-30'),
     type: 'offboarding',
     progress: 40,

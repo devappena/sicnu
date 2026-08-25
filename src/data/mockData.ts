@@ -29,11 +29,11 @@ import type {
 export const mockEmployees: Employee[] = [
   {
     id: '1',
-    firstName: 'Aline',
-    lastName: 'Kalala',
-    email: 'aline.kalala@comnat-unesco.cd',
-    phone: '+243 999 123 456',
-    position: 'Secrétaire générale',
+    firstName: 'Victor',
+    lastName: 'Bafuafua Mande',
+    email: 'admin@shodan.cd',
+    phone: '+243 810 000 001',
+    position: 'Administrateur',
     department: 'Secrétariat général',
     salary: 1500000,
     hireDate: new Date('2020-01-15'),
@@ -41,85 +41,85 @@ export const mockEmployees: Employee[] = [
     address: 'Gombe, Kinshasa',
     dateOfBirth: new Date('1985-03-20'),
     emergencyContact: {
-      name: 'Paul Kalala',
-      phone: '+243 999 123 457',
-      relationship: 'Épouse'
+      name: '',
+      phone: '',
+      relationship: ''
     }
   },
   {
     id: '2',
-    firstName: 'Joel',
-    lastName: 'Nyengele',
-    email: 'joel.nyengele@comnat-unesco.cd',
-    phone: '+243 999 234 567',
-    position: 'Responsable RH',
-    department: 'Ressources Humaines',
+    firstName: 'Jonas',
+    lastName: 'Maki Busha',
+    email: 'drh@shodan.cd',
+    phone: '+243 810 000 002',
+    position: 'Directeur RH',
+    department: 'Ressources humaines',
     salary: 1200000,
     hireDate: new Date('2021-03-10'),
     status: 'active',
-    address: 'Boulevard du 30 Juin, Kinshasa',
+    address: 'Gombe, Kinshasa',
     dateOfBirth: new Date('1988-07-12'),
     emergencyContact: {
-      name: 'Ruth Nyengele',
-      phone: '+243 999 234 568',
-      relationship: 'Épouse'
+      name: '',
+      phone: '',
+      relationship: ''
     }
   },
   {
     id: '3',
-    firstName: 'Marie Clemence',
-    lastName: 'Kangite',
-    email: 'marie.kangite@comnat-unesco.cd',
-    phone: '+243 999 345 678',
-    position: 'Professeure de Droit',
-    department: 'Académique',
-    salary: 800000,
-    hireDate: new Date('2019-09-01'),
+    firstName: 'Junior',
+    lastName: 'Kizir Woldia',
+    email: 'agent1@shodan.cd',
+    phone: '+243 810 000 003',
+    position: 'Assistant administratif',
+    department: 'Programmes',
+    salary: 600000,
+    hireDate: new Date('2022-01-20'),
     status: 'active',
-    address: 'Avenue Mobutu, Kinshasa',
-    dateOfBirth: new Date('1980-11-30'),
+    address: 'Kinshasa',
+    dateOfBirth: new Date('1992-05-15'),
     emergencyContact: {
-      name: 'Jean Kangite',
-      phone: '+243 999 345 679',
-      relationship: 'Époux'
+      name: '',
+      phone: '',
+      relationship: ''
     }
   },
   {
     id: '4',
-    firstName: 'Israel Mutombo',
-    lastName: 'Nyembue',
-    email: 'israel.nyembue@comnat-unesco.cd',
-    phone: '+243 999 456 789',
-    position: 'Secrétaire Exécutif',
-    department: 'Administration',
-    salary: 600000,
-    hireDate: new Date('2022-01-20'),
+    firstName: 'Ghislain',
+    lastName: 'Baende',
+    email: 'agent2@shodan.cd',
+    phone: '+243 810 000 004',
+    position: 'Chargé de programmes',
+    department: 'Programmes',
+    salary: 650000,
+    hireDate: new Date('2022-06-01'),
     status: 'active',
-    address: 'Avenue de la Libération, Kinshasa',
-    dateOfBirth: new Date('1990-05-15'),
+    address: 'Kinshasa',
+    dateOfBirth: new Date('1994-09-08'),
     emergencyContact: {
-      name: 'Deborah Nyembue',
-      phone: '+243 999 456 790',
-      relationship: 'Épouse'
+      name: '',
+      phone: '',
+      relationship: ''
     }
   },
   {
     id: '5',
-    firstName: 'Claude',
-    lastName: 'Mujinga',
-    email: 'claude.mujinga@comnat-unesco.cd',
-    phone: '+243 999 567 890',
-    position: 'Agent de Sécurité',
-    department: 'Sécurité',
-    salary: 450000,
+    firstName: 'Yasmine',
+    lastName: 'Kabanga',
+    email: 'yasmine.kabanga@shodan.cd',
+    phone: '+243 810 000 005',
+    position: 'Chargée de communication',
+    department: 'Communication',
+    salary: 700000,
     hireDate: new Date('2021-06-15'),
-    status: 'on_leave',
-    address: 'Avenue Tombalbaye, Kinshasa',
-    dateOfBirth: new Date('1980-12-08'),
+    status: 'active',
+    address: 'Kinshasa',
+    dateOfBirth: new Date('1996-12-08'),
     emergencyContact: {
-      name: 'Sylvie Mujinga',
-      phone: '+243 999 567 891',
-      relationship: 'Épouse'
+      name: '',
+      phone: '',
+      relationship: ''
     }
   }
 ];
@@ -129,14 +129,14 @@ export const mockDepartments: Department[] = [
     id: '1',
     name: 'Administration',
     description: 'Gestion administrative et financière',
-    headOfDepartment: 'Aline Kalala',
+    headOfDepartment: 'Victor Bafuafua Mande',
     employeeCount: 8
   },
   {
     id: '2',
     name: 'Ressources Humaines',
     description: 'Gestion du personnel et développement des compétences',
-    headOfDepartment: 'Grace Kabila',
+    headOfDepartment: 'Jonas Maki Busha',
     employeeCount: 4
   },
   {
@@ -150,7 +150,7 @@ export const mockDepartments: Department[] = [
     id: '4',
     name: 'Sécurité',
     description: 'Sécurité et surveillance des locaux',
-    headOfDepartment: 'Claude Mujinga',
+    headOfDepartment: 'Yasmine Kabanga',
     employeeCount: 6
   }
 ];
@@ -367,7 +367,7 @@ export const mockDocuments: Document[] = [
     id: '1',
     employeeId: '1',
     type: 'contract',
-    name: 'Contrat_Aline_Kalala.pdf',
+    name: 'Contrat_Victor_Bafuafua.pdf',
     url: '/documents/contracts/contract_1.pdf',
     uploadDate: new Date('2020-01-15'),
     size: 2048000,
@@ -377,7 +377,7 @@ export const mockDocuments: Document[] = [
     id: '2',
     employeeId: '1',
     type: 'cv',
-    name: 'CV_Aline_Kalala.pdf',
+    name: 'CV_Victor_Bafuafua.pdf',
     url: '/documents/cvs/cv_1.pdf',
     uploadDate: new Date('2020-01-10'),
     size: 1024000,
@@ -635,7 +635,7 @@ export const mockApprovalWorkflows: ApprovalWorkflow[] = [
         stepIndex: 0,
         approverId: '2',
         approverRole: 'department_head',
-        approverName: 'Joel Nyengele',
+        approverName: 'Victor Bafuafua Mande',
         status: 'approved',
         actionDate: new Date('2025-07-01'),
         comments: 'Approuvé - période de faible activité',
@@ -646,7 +646,7 @@ export const mockApprovalWorkflows: ApprovalWorkflow[] = [
         stepIndex: 1,
         approverId: '1',
         approverRole: 'hr',
-        approverName: 'Aline Kalala',
+        approverName: 'Jonas Maki Busha',
         status: 'pending',
         isRequired: true,
         canDelegate: false

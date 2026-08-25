@@ -17,8 +17,8 @@ export const identity = {
 } as const;
 
 export const demoAccounts = [
-  { email: 'admin@shodow.com', password: '996633a', role: 'Administrateur' },
-  { email: 'drh@shodow.com', password: '996633a', role: 'DRH' },
-  { email: 'agent1@shodow.com', password: '996633a', role: 'Agent' },
-  { email: 'agent2@shodow.com', password: '996633a', role: 'Agent' },
+  { email: 'admin@shodan.cd', password: '996633a', role: 'Administrateur' },
+  { email: 'drh@shodan.cd', password: '996633a', role: 'DRH' },
+  { email: 'agent1@shodan.cd', password: '996633a', role: 'Agent' },
+  { email: 'agent2@shodan.cd', password: '996633a', role: 'Agent' },
 ] as const;

@@ -177,7 +177,7 @@ const Login: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`input-field ${errors.email ? 'border-red-500' : ''}`}
-                  placeholder="votre.email@shodow.com"
+                  placeholder="votre.email@shodan.cd"
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
