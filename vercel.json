@@ -9,6 +9,14 @@
     "api/[...path].js": {
       "maxDuration": 10,
       "includeFiles": "server/**"
+    },
+    "api/auth/[...rest].js": {
+      "maxDuration": 10,
+      "includeFiles": "server/**"
+    },
+    "api/employees/[...rest].js": {
+      "maxDuration": 10,
+      "includeFiles": "server/**"
     }
   }
 }
