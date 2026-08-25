@@ -33,10 +33,11 @@ const getNumberEnvVar = (key: string, defaultValue: number): number => {
 /**
  * Configuration de l'API
  */
+const configuredApiUrl = getEnvVar('VITE_API_BASE_URL', '');
 export const apiConfig = {
-  baseURL: getEnvVar('VITE_API_BASE_URL', 'http://localhost:3000/api'),
+  baseURL: configuredApiUrl || (import.meta.env.PROD ? '/api' : 'http://localhost:3000/api'),
   timeout: getNumberEnvVar('VITE_API_TIMEOUT', 30000),
-  enableLogging: getBoolEnvVar('VITE_ENABLE_API_LOGGING', true),
+  enableLogging: getBoolEnvVar('VITE_ENABLE_API_LOGGING', !import.meta.env.PROD),
 } as const;
 
 /**

@@ -6,7 +6,7 @@
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "functions": {
-    "api/[[...path]].js": {
+    "api/[...path].js": {
       "maxDuration": 10,
       "includeFiles": "server/**"
     }
