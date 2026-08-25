@@ -1,36 +1,11 @@
-const CACHE_NAME = 'sicnu-v1.0.0';
-const STATIC_CACHE_NAME = 'sicnu-static-v1.0.0';
-const DYNAMIC_CACHE_NAME = 'sicnu-dynamic-v1.0.0';
+const CACHE_NAME = 'sicnu-v1.0.2';
+const STATIC_CACHE_NAME = 'sicnu-static-v1.0.2';
+const DYNAMIC_CACHE_NAME = 'sicnu-dynamic-v1.0.2';
 
-// Ressources à mettre en cache immédiatement
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
   '/manifest.json',
-  '/static/css/main.css',
-  '/static/js/main.js',
-  '/pwa-icons/icon-192x192.png',
-  '/pwa-icons/icon-512x512.png',
-  '/offline.html'
-];
-
-// Ressources à mettre en cache dynamiquement
-const DYNAMIC_ASSETS = [
-  '/api/employees',
-  '/api/absences',
-  '/api/statistics',
-  '/api/dashboard'
-];
-
-// Pages importantes à mettre en cache
-const PAGES_TO_CACHE = [
-  '/',
-  '/dashboard',
-  '/employees',
-  '/absences',
-  '/statistics',
-  '/profile',
-  '/settings'
+  '/offline.html',
+  '/cnu-logo.jpg'
 ];
 
 // Installation du Service Worker
@@ -43,11 +18,6 @@ self.addEventListener('install', (event) => {
       caches.open(STATIC_CACHE_NAME).then((cache) => {
         console.log('📦 Cache statique: Ajout des ressources');
         return cache.addAll(STATIC_ASSETS);
-      }),
-      // Cache des pages principales
-      caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-        console.log('📄 Cache dynamique: Préparation');
-        return cache.addAll(PAGES_TO_CACHE);
       })
     ]).then(() => {
       console.log('✅ Service Worker: Installation terminée');
@@ -89,29 +59,36 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Stratégies de mise en cache selon le type de ressource
-  if (request.method === 'GET') {
-    // Ressources statiques: Cache First
-    if (STATIC_ASSETS.some(asset => url.pathname.includes(asset))) {
-      event.respondWith(cacheFirstStrategy(request));
-      return;
-    }
-
-    // API: Network First avec fallback
-    if (url.pathname.startsWith('/api/')) {
-      event.respondWith(networkFirstStrategy(request));
-      return;
-    }
-
-    // Pages: Stale While Revalidate
-    if (PAGES_TO_CACHE.includes(url.pathname)) {
-      event.respondWith(staleWhileRevalidateStrategy(request));
-      return;
-    }
-
-    // Autres ressources: Network avec fallback cache
-    event.respondWith(networkWithCacheFallback(request));
+  if (request.method !== 'GET') {
+    return;
   }
+
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
+  // Ne jamais servir une page HTML périmée (sinon l’app rappelle localhost).
+  if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(networkWithCacheFallback(request));
+    return;
+  }
+
+  if (url.pathname.startsWith('/api/')) {
+    event.respondWith(networkFirstStrategy(request));
+    return;
+  }
+
+  if (url.pathname.startsWith('/assets/')) {
+    event.respondWith(cacheFirstStrategy(request));
+    return;
+  }
+
+  if (STATIC_ASSETS.includes(url.pathname)) {
+    event.respondWith(cacheFirstStrategy(request));
+    return;
+  }
+
+  event.respondWith(networkWithCacheFallback(request));
 });
 
 // Stratégie Cache First (pour les ressources statiques)

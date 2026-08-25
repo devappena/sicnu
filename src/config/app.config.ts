@@ -30,12 +30,25 @@ const getNumberEnvVar = (key: string, defaultValue: number): number => {
   return isNaN(parsed) ? defaultValue : parsed;
 };
 
+function resolveApiBaseUrl(): string {
+  const raw = String(import.meta.env.VITE_API_BASE_URL || '').trim();
+  const pointsToThisMachine = /localhost|127\.0\.0\.1/i.test(raw);
+
+  if (import.meta.env.PROD) {
+    if (!raw || pointsToThisMachine) {
+      return '/api';
+    }
+    return raw.replace(/\/$/, '');
+  }
+
+  return raw || 'http://localhost:3000/api';
+}
+
 /**
  * Configuration de l'API
  */
-const configuredApiUrl = getEnvVar('VITE_API_BASE_URL', '');
 export const apiConfig = {
-  baseURL: configuredApiUrl || (import.meta.env.PROD ? '/api' : 'http://localhost:3000/api'),
+  baseURL: resolveApiBaseUrl(),
   timeout: getNumberEnvVar('VITE_API_TIMEOUT', 30000),
   enableLogging: getBoolEnvVar('VITE_ENABLE_API_LOGGING', !import.meta.env.PROD),
 } as const;
