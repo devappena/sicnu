@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const dataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data');
+const repoDataDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data');
+const dataDir = process.env.VERCEL ? path.join('/tmp', 'sicnu-data') : repoDataDir;
 const employeesFile = path.join(dataDir, 'employees.json');
 
 const seedEmployees = [

@@ -11,14 +11,14 @@ Backend du **Système d’information de la Commission nationale UNESCO-RDC**.
 - `GET /api/auth/verify` (Bearer)
 - `GET|POST /api/employees` et `GET|PUT|DELETE /api/employees/:id` (Bearer)
 
-Le reste sous `/api` renvoie 501. Les fiches sont enregistrées dans `api/data/employees.json`.
+Le reste sous `/api` renvoie 501. En local, les fiches sont enregistrées dans `server/data/employees.json`.
 
 ```bash
-cd api
+cd server
 npm install
 npm run dev
 ```
 
 Écoute : `http://localhost:3000`.
 
-Comptes de test : voir le README à la racine du dépôt.
+En production (Vercel), la même API est exposée sur `/api` du site. Les comptes de test : voir le README à la racine du dépôt.

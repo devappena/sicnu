@@ -14,7 +14,7 @@ npm run dev
 ```
 
 ```bash
-cd api
+cd server
 npm install
 npm run dev
 ```
@@ -36,14 +36,15 @@ Comptes de démonstration :
 ```
 /
   src/     frontend React (Vite)
-  api/     backend (squelette Express, port 3000)
+  server/  backend Express (port 3000 en local, /api sur Vercel)
+  api/     point d’entrée serverless Vercel
   public/
 ```
 
-L’API :
+L’API en local :
 
 ```bash
-cd api
+cd server
 npm install
 npm run dev
 ```
@@ -52,10 +53,15 @@ npm run dev
 
 ## Déploiement Vercel
 
-1. Pousser le dépôt sur GitHub
-2. Importer dans [Vercel](https://vercel.com)
-3. Framework : Vite — Build : `npm run build` — Output : `dist`
-4. Laisser `VITE_BASE_PATH` vide (racine `/`)
+Le frontend et l’API partent ensemble au `git push` (même projet).
+
+1. Pousser le dépôt sur GitHub — Vercel reconstruit le site
+2. Framework : Vite — Build : `npm run build` — Output : `dist`
+3. Laisser `VITE_BASE_PATH` vide (racine `/`)
+4. Ne pas définir `VITE_API_BASE_URL` vers `localhost` : en production elle vaut `/api`
+5. Optionnel : variable `JWT_SECRET` (secret long, uniquement dans le dashboard Vercel, pas dans Git)
+
+La connexion en ligne utilise les mêmes comptes de démonstration qu’en local.
 
 ## Tests
 

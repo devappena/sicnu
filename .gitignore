@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 coverage
+server/node_modules
+server/.env
 api/node_modules
 api/.env
 
